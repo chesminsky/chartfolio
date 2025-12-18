@@ -5,7 +5,7 @@
 /dist
 /node_modules
 
-# Logs
+# Logs (only root logs directory, not src/logs/)
 /logs
 *.log
 npm-debug.log*

@@ -17,9 +17,9 @@ docker-compose.override.yml
 .DS_Store
 Thumbs.db
 
-# Logs
+# Logs (only root logs directory, not src/logs/ or assets-server/src/logs/)
 *.log
-logs/
+/logs
 
 # Temporary files
 *.tmp
