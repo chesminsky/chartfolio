@@ -1,0 +1,154 @@
+@import '../../../../styles-variables';
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+.list-icon {
+  border-radius: 5px;
+  height: 24px;
+  width: 24px;
+  margin-top: 6px;
+}
+
+.controls {
+  margin-bottom: 10px;
+
+  &__row {
+    display: flex;
+    margin: 0 -15px -15px -15px;
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      display: block;
+      margin: 0 -15px;
+    }
+  }
+
+  &__col {
+    width: 50%;
+    padding: 0 15px;
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      width: 100%;
+    }
+  }
+
+  .links {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -6px;
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      margin: 0;
+    }
+  }
+}
+
+.dividends {
+  &__header {
+    display: flex;
+    margin-bottom: 20px;
+    display: none;
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      display: block;
+    }
+    .mat-icon {
+      padding: 8px 0;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.dividends-grid {
+  @media (min-width: map-get($grid-breakpoints, lg)) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin: 0 -60px;
+    & > * {
+      width: 50%;
+      padding: 0 60px;
+      &:last-child {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.no-data {
+  text-align: center;
+
+  .wallet {
+    padding: 80px 0 20px;
+    mat-icon {
+      font-size: 120px;
+      width: auto;
+      height: auto;
+      color: rgba(0, 0, 0, 0.04);
+    }
+  }
+  .text {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #666;
+  }
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-list {
+  margin-top: 20px;
+}
+
+::ng-deep .mat-subheader {
+  padding-bottom: 0 !important;
+}
+
+.mat-list-icon > * {
+  height: 24px;
+  width: 24px;
+  border-radius: 4px;
+}
+
+.tax {
+  padding: 10px 20px;
+}
+
+.toggle {
+  padding-top: 20px;
+}
+
+.dividends-loader {
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: end;
+    padding: 0 30px 0 40px;
+    height: 330px;
+  }
+  li {
+    display: block;
+    width: calc(100% / 12 - 4px);
+    &:nth-child(1n) {
+      height: 290px;
+    }
+    &:nth-child(2n) {
+      height: 110px;
+    }
+    &:nth-child(3n) {
+      height: 220px;
+    }
+    &:nth-child(4n) {
+      height: 270px;
+    }
+  }
+}

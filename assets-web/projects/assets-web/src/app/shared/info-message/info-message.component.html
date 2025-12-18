@@ -1,0 +1,14 @@
+<div class="info-message-body">
+  <ng-content></ng-content>
+</div>
+<div
+  class="message-overlay"
+  [ngClass]="{
+    'info-notification-overlay': type === 'info',
+    'warning-notification-overlay': type === 'warn'
+  }"
+></div>
+
+<mat-icon class="close" (click)="hide()">
+  close
+</mat-icon>

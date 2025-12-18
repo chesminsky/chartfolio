@@ -1,0 +1,34 @@
+<div class="donut" [ngClass]="{ skeleton: loading }">
+  <div #donut></div>
+
+  <div class="total" [ngStyle]="{ top: hostWidth / 2 }" *ngIf="currency && !loading">
+    {{ total | currency: currency:'symbol-narrow':getCurrencyFormat(currency) }}
+  </div>
+</div>
+
+<ul class="legend" *ngIf="!loading">
+  <li
+    class="legend__item"
+    *ngFor="let c of legend; let i = index"
+    (click)="toggleAsset(c)"
+    [ngClass]="{ 'is-hidden': hiddenSet.has(c.category) }"
+  >
+    <span class="legend__marker" [ngStyle]="{ background: getColor(c.category) }"></span>
+    <span class="legend__text">
+      <span class="pointer" class="legend__text-name">
+        {{ getOptionNameByCode(c.category) }}
+      </span>
+      <span class="legend__text-value">
+        {{ c.value | currency: currency:'symbol-narrow':getCurrencyFormat(currency) }}
+      </span>
+      <span class="legend__text-percent"> {{ getPercent(c.category) | number: '0.1-1' }}% </span>
+    </span>
+  </li>
+</ul>
+
+<ul class="legend" *ngIf="loading">
+  <li class="legend__item" *ngFor="let item of [1, 2, 3]">
+    <span class="legend__marker skeleton skeleton-item"></span>
+    <span class="legend__text skeleton skeleton-item"> </span>
+  </li>
+</ul>

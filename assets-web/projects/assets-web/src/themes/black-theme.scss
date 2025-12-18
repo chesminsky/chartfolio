@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+@import '../styles-variables';
+
+$anms-black-primary: mat.define-palette(mat.$grey-palette, 700, 300, 900);
+$anms-black-accent: mat.define-palette(mat.$blue-grey-palette, 400);
+$anms-black-warn: mat.define-palette(mat.$red-palette, 500);
+
+$anms-black-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $anms-black-primary,
+      accent: $anms-black-accent,
+      warn: $anms-black-warn
+    ),
+    typography: $typography,
+    density: 0
+  )
+);

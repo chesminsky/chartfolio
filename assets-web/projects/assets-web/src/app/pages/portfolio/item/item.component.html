@@ -1,0 +1,188 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <anms-messages></anms-messages>
+      <header class="header">
+        <div class="header__left">
+          <div class="header__block">
+            <button mat-icon-button type="button" (click)="back()">
+              <mat-icon>
+                arrow_back
+              </mat-icon>
+            </button>
+          </div>
+          <div class="header__block">
+            <h3 *ngIf="selectedAsset$ | async as selectedAsset">
+              <div *ngIf="!assetNameEdit" class="edit-name-wrap">
+                {{ selectedAsset.name }}
+                <mat-icon class="edit-icon" (click)="editName()">edit</mat-icon>
+              </div>
+              <div *ngIf="assetNameEdit" class="edit-name-wrap">
+                <div
+                  #editName
+                  class="edit-name"
+                  type="text"
+                  [formControl]="assetNameCtrl"
+                  contenteditable
+                  (keydown.enter)="submitName($event, selectedAsset)"
+                ></div>
+                <mat-icon (click)="submitName($event, selectedAsset)">
+                  check
+                </mat-icon>
+
+              </div>
+            </h3>
+          </div>
+        </div>
+
+        <div class="header__block">
+          <button type="button" mat-raised-button (click)="toNew()">
+            {{ 'anms.portfolio.add-asset' | translate }}
+          </button>
+        </div>
+      </header>
+
+      <ng-container *ngIf="assets$ | async as assets">
+        <ng-container *ngIf="currency$ | async as currency">
+          <mat-table *ngIf="assets" [dataSource]="assets" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>
+                {{ 'anms.portfolio.name' | translate }}
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <div class="nowrap">
+                  {{ element.name }}
+                </div>
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="code">
+              <mat-header-cell *matHeaderCellDef>
+                {{ 'anms.portfolio.symbol' | translate }}
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.code }}
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef>
+                {{ 'anms.portfolio.total' | translate }}
+              </mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="value">
+              <mat-header-cell *matHeaderCellDef>
+                {{ 'anms.portfolio.value' | translate }}
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.value }}
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="price">
+              <mat-header-cell *matHeaderCellDef>
+                {{ 'anms.portfolio.price' | translate }}
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ calcPrice(element) | async | currency: currency:'symbol-narrow':getCurrencyFormat(currency) }}
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef>
+                {{ calcTotalPrice() | async | currency: currency:'symbol-narrow':getCurrencyFormat(currency) }}
+              </mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="categories">
+              <mat-header-cell *matHeaderCellDef>
+                {{ 'anms.portfolio.categories' | translate }}
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <ng-container *ngIf="getTags(element) | async as tags">
+                  <mat-chip-set class="chip-list" class="desktop">
+                    <mat-chip *ngFor="let t of tags">
+                      {{ t }}
+                    </mat-chip>
+                  </mat-chip-set>
+                  <anms-tag-overlay *ngIf="tags.length" class="mobile" [tags]="tags"></anms-tag-overlay>
+                </ng-container>
+
+                <div
+                  class="mobile-actions error-notification-overlay"
+                  [ngClass]="{ 'is-active': mobileActionsRow === element }"
+                >
+                  <button mat-icon-button type="button" (click)="deleteAsset($event, element)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <button class="desktop" mat-icon-button type="button" (click)="deleteAsset($event, element)">
+                  <mat-icon class="delete">delete</mat-icon>
+                </button>
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              (click)="toAsset(row)"
+              (swipeleft)="onSwipeLeft($event, row)"
+              (swiperight)="onSwipeRight($event, row)"
+            ></mat-row>
+            <div *matNoDataRow>
+              <div class="no-data">
+                {{ 'anms.portfolio.no-assets-data' | translate }}
+              </div>
+            </div>
+            <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+          </mat-table>
+        </ng-container>
+      </ng-container>
+
+      <div class="import" *ngIf="userplan$ | async as plan">
+        <input hidden (change)="onLoadValues($event)" #fileInput type="file" id="file" accept=".xlsx,.csv" />
+        <button [disabled]="plan === 'free'" mat-raised-button (click)="fileInput.click()">
+          <svg
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 300 300"
+            style="enable-background:new 0 0 291.319 291.319;"
+            xml:space="preserve"
+            width="20"
+            height="20"
+            style="margin-right: 5px"
+          >
+            <g>
+              <path
+                style="fill:#720E9E;"
+                d="M145.659,0c80.45,0,145.66,65.219,145.66,145.66c0,80.45-65.21,145.659-145.66,145.659
+		S0,226.109,0,145.66C0,65.219,65.21,0,145.659,0z"
+              />
+              <path
+                style="fill:#FFFFFF;"
+                d="M212.353,114.98l0.155-0.027l4.825-5.371l-0.237-0.018l0.51-0.801h-67.595l2.604,9.249h18.444
+		l-31.044,28.722c-6.336-9.24-21.184-30.479-31.544-46.411h19.254v-6.555l0.264-1.884l-0.264-0.036v-0.765H54.631v9.24H77.49
+		c8.876,7.328,47.358,54.049,48.76,58.51c0.564,4.179,1.366,28.841-0.291,30.698c-1.994,2.868-22.814,1.32-26.483,1.593
+		l-0.137,9.058c6.7,0.2,26.801-0.009,33.584-0.009c13.364,0,36.77-0.346,40.065-0.082l0.41-8.576l-26.901-0.401
+		c-0.564-3.887-1.183-28.422-0.619-31.098c2.54-7.765,43.816-39.902,48.059-41.112l3.997-0.901h12.472
+		C210.405,118.002,212.353,114.98,212.353,114.98z M202.266,179.079l11.689,0.892l13.628-49.979
+		c-2.276-0.082-22.95-1.93-25.636-2.431L202.266,179.079z M200.245,187.091l0.064,12.208l5.917,0.492l6.391,0.446l1.875-11.944
+		l-6.737-0.31C207.756,187.983,200.245,187.091,200.245,187.091z"
+              />
+            </g>
+          </svg>
+          {{ 'anms.portfolio.import' | translate }}
+        </button>
+
+        <div class="import-info">
+          <mat-icon [matTooltip]="'anms.portfolio.import-tooltip' | translate" matTooltipPosition="above"
+            >info_outline</mat-icon
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

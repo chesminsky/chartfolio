@@ -1,0 +1,283 @@
+{
+	", ": ", ",
+	"anms": {
+		"categories": {
+			"add": "添加新组",
+			"add-option": "添加类别",
+			"codes": {
+				"ASSET_TYPE": "资产类型",
+				"INCOME_GENERATION": "收入生成",
+				"LIQUIDITY": "流动性",
+				"MARKETS": "市场",
+				"PURPOSE_OR_GOAL": "目的或目标",
+				"RISK_PROFILE": "风险配置",
+				"SECTOR_INDUSTRY": "行业领域"
+			},
+			"create": "创建",
+			"create-new": "创建新组",
+			"delete": "删除类别组",
+			"group-name": "组名",
+			"name": "组名",
+			"no-data": "您没有分类组",
+			"option": "类别",
+			"option-codes": {
+				"AGGRESSIVE": "激进",
+				"ANNUITIES": "年金",
+				"BONDS": "债券",
+				"CASH": "现金",
+				"COMMODITIES": "商品",
+				"COMMUNICATION_SERVICES": "通讯服务",
+				"CONSERVATIVE": "保守",
+				"CONSUMER_DISCRETIONARY": "消费者自由裁量",
+				"CONSUMER_STAPLES": "消费者必需品",
+				"CRYPTO": "加密货币",
+				"DEVELOPED": "发达",
+				"DIVIDEND_PAYING_STOCKS": "股息支付股票",
+				"EMERGENCY_FUND": "应急基金",
+				"EMERGING": "新兴",
+				"ENERGY": "能源",
+				"FINANCIAL_SERVICES": "金融服务",
+				"HEALTHCARE": "医疗保健",
+				"ILLIQUID_ASSETS": "非流动资产",
+				"INDUSTRIALS": "工业",
+				"INFORMATION_TECHNOLOGY": "信息技术",
+				"INTEREST_PAYING_BONDS": "付息债券",
+				"LIQUID_ASSETS": "流动资产",
+				"LONG_TERM_GROWTH": "长期增长",
+				"MATERIALS": "材料",
+				"MODERATE": "适度",
+				"REAL_ESTATE": "房地产",
+				"REIT": "房地产投资信托",
+				"RENTAL_PROPERTIES": "租赁物业",
+				"RETIREMENT_SAVINGS": "退休储蓄",
+				"RUSSIA": "俄罗斯",
+				"SEMI_LIQUID_ASSETS": "半流动资产",
+				"SHORT_TERM_GOALS": "短期目标",
+				"STOCKS": "股票",
+				"USA": "美国",
+				"UTILITIES": "公用事业"
+			},
+			"options": "类别",
+			"update": "更新"
+		},
+		"description": {
+			"dividends": "股息",
+			"overview": "通过Chartfolio，您可以轻松跟踪您的资产，包括货币、股票和加密货币。查看您在任何货币中的总价值，并通过自定义类别和环形图分析您的投资组合！掌控您的投资！"
+		},
+		"dividends": {
+			"no-data": "今年没有股息",
+			"tax-included": "包括税款",
+			"tax-value": "税收 (%)",
+			"title": "股息日历",
+			"total": "总股息",
+			"year": "年"
+		},
+		"donation": {
+			"copied": "已复制",
+			"hash": "请在此处粘贴您的交易哈希",
+			"payment-option": "支付选项",
+			"success-text": "我们会尽快与您联系！",
+			"success-title": "您的请求已发送",
+			"upgrade": "升级账户"
+		},
+		"login": {
+			"already-have-account": "已经有账号了？",
+			"dont-have-account": "还没有账号？",
+			"email": "邮箱地址",
+			"facebook-login": "使用Facebook登录",
+			"forgot-password": "忘记密码？",
+			"forgot-password-button": "重置密码",
+			"forgot-password-header": "查看您的电子邮件",
+			"forgot-password-text-post": "请点击邮件中的链接以重置密码。",
+			"forgot-password-text-pre": "我们已向您发送了一封电子邮件至",
+			"forgot-password-title": "忘记密码？",
+			"google-login": "使用Google登录",
+			"have-not-received-code": "没有收到邮件？",
+			"invalid-email": "无效的邮箱",
+			"login-button": "登录",
+			"login-link": "登录",
+			"login-title": "欢迎",
+			"or": "或者",
+			"password": "密码",
+			"password-not-match": "密码不匹配",
+			"register-button": "继续",
+			"register-link": "注册",
+			"register-title": "创建您的账户",
+			"registered-header": "请验证您的邮箱",
+			"registered-text-post": "只需点击邮件中的链接即可完成注册。如果找不到邮件，请检查您的垃圾邮件文件夹。",
+			"registered-text-pre": "您快完成了！我们已向以下邮箱发送了一封邮件：",
+			"resend-email-verification": "重新发送邮箱验证",
+			"weak-password": "密码必须包含至少8个字符，至少1个大写字母和1个数字"
+		},
+		"menu": {
+			"add-portfolio": "添加投资组合",
+			"categories": "分类",
+			"dividends": "股息",
+			"login": "登录",
+			"logout": "退出",
+			"more": "添加更多...",
+			"overview": "总览",
+			"portfolios": "投资组合",
+			"register": "注册",
+			"settings": "设置"
+		},
+		"notification": {
+			"asset-created": "您已创建了一个新资产",
+			"asset-deleted": "资产已删除",
+			"asset-edited": "您已编辑了一个资产",
+			"auth-error": "认证错误",
+			"category-created": "您已创建了一个新的分类组",
+			"category-deleted": "分类组已删除",
+			"category-edited": "您已编辑了一个分类组",
+			"email-verified": "您的电子邮件已验证。请登录您的账户",
+			"email-verify-link-invalid": "此电子邮件验证链接无效",
+			"file-error": "文件错误。请重试",
+			"file-format-error": "文件格式错误。应为 .csv、.xlsx 格式",
+			"password-changed": "密码已更改",
+			"verification-email-sent": "邮件已发送"
+		},
+		"overview": {
+			"add-asset": "添加资产",
+			"add-category": "添加分类...",
+			"add-portfolio": "添加投资组合...",
+			"all": "总览",
+			"categories": "分类",
+			"go-to": "转至",
+			"go-to-portfolio": "转至投资组合",
+			"no-data": "您的投资组合为空",
+			"not-authenticated": "您未认证。\n所有更改将保存在您设备的本地存储中。如果应用程序更新或清除缓存，这些更改可能会丢失。为了保存您的数据，请登录或注册",
+			"portfolios": "投资组合",
+			"run-out-of-limits": "您已超出资产或分类的最大限制。请",
+			"title": "投资组合概述",
+			"upgrade": "升级您的账户"
+		},
+		"portfolio-name": "名称",
+		"portfolio": {
+			"add-asset": "添加资产",
+			"asset": {
+				"add-category": "添加分类组",
+				"category": "分类组",
+				"code": "资产代码",
+				"create": "创建",
+				"create-new": "创建新资产",
+				"currency": "选择货币",
+				"delete": "删除资产",
+				"delete-category": "删除组",
+				"enter-code": "选择资产代码",
+				"enter-name": "输入名称",
+				"enter-price": "输入价格",
+				"enter-value": "输入价值",
+				"error-categories-not-unique": "重复的分类组",
+				"error-options-not-unique": "重复的分类",
+				"error-percentage-sum": "分类比例总和应为100%",
+				"name": "资产名称",
+				"option": "分类",
+				"percentage": "比例，%",
+				"price": "单价",
+				"search-crypto": "搜索加密货币",
+				"search-currency": "搜索货币",
+				"search-for-categories": "搜索分类...",
+				"search-stocks": "搜索股票",
+				"type": "选择资产类型",
+				"types": {
+					"crypto": "加密货币 (Coingecko)",
+					"currency": "货币",
+					"custom": "自定义",
+					"moex": "股票、债券等 (MOEX)",
+					"stocks": "股票、债券等 (Yahoo Finance)"
+				},
+				"update": "更新",
+				"value": "价值"
+			},
+			"categories": "分类",
+			"create": "创建新投资组合",
+			"create-btn": "创建",
+			"import": "从Yahoo Finance导入",
+			"import-tooltip": "如果您使用Yahoo Finance，您可以将资产导出为csv文件，然后导入到这里。这是一项专业功能。",
+			"name": "名称",
+			"no-assets-data": "您没有资产",
+			"no-data": "您没有投资组合",
+			"price": "价格",
+			"shared": {
+				"autocomplete": {
+					"no_results": "未找到结果"
+				}
+			},
+			"symbol": "符号",
+			"total": "总计",
+			"value": "价值"
+		},
+		"reset-password": {
+			"confirm-password": "确认当前密码",
+			"email": "邮箱",
+			"old-password": "当前密码",
+			"password": "新密码",
+			"submit-button": "确认",
+			"title": "重置密码"
+		},
+		"settings": {
+			"general": {
+				"currencies-label": "首选货币",
+				"currencies-search": "搜索...",
+				"language-placeholder": "选择语言",
+				"title": "常规设置"
+			},
+			"themes": {
+				"blue": "蓝色",
+				"dark": "暗色",
+				"light": "亮色",
+				"nature": "自然",
+				"night-mode": "夜间模式",
+				"placeholder": "选择主题",
+				"title": "主题设置"
+			},
+			"title": "设置"
+		}
+	},
+	"server": {
+		"errors": {
+			"api": {
+				"crypto": "加密货币API错误",
+				"currency": "货币API错误",
+				"moex": "MOEX API错误",
+				"yahoo": "Yahoo API错误"
+			},
+			"assets": {
+				"limit": "已达到资产的最大数量限制"
+			},
+			"auth": {
+				"already-registered": "此邮箱已经注册过账号",
+				"change-password": "更改密码错误",
+				"error": "授权错误",
+				"invalid-credentials": "无效的凭据",
+				"login-sent-recently": "验证码已经发送，请稍后再试。超时时间为3分钟",
+				"no-password-provided": "未提供密码",
+				"reset_password_sent_recently": "重置密码验证码已发送，请稍后再试。超时时间为3分钟",
+				"user-not-found": "未找到用户",
+				"user-not-registered": "用户未注册",
+				"user-not-verified": "用户未验证",
+				"wrong-current-password": "当前密码错误",
+				"wrong-email-token": "错误的电子邮件令牌"
+			},
+			"categories": {
+				"limit": "已达到分类的最大数量限制"
+			}
+		}
+	},
+	"shared": {
+		"months": {
+			"april": "四月",
+			"august": "八月",
+			"december": "十二月",
+			"february": "二月",
+			"january": "一月",
+			"july": "七月",
+			"june": "六月",
+			"march": "三月",
+			"may": "五月",
+			"november": "十一月",
+			"october": "十月",
+			"september": "九月"
+		}
+	}
+}

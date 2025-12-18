@@ -1,0 +1,28 @@
+<div class="background">
+    <div class="gradient">
+      <div class="container">
+        <header>
+          <button mat-icon-button type="button" (click)="back()">
+            <mat-icon>
+              arrow_back
+            </mat-icon>
+          </button>
+          <h3>{{ 'anms.portfolio.create' | translate }}</h3>
+        </header>
+        <form [formGroup]="form" autocomplete="off" (submit)="onSubmit()">
+          <mat-form-field appearance="fill" class="full">
+            <mat-label>{{ 'anms.portfolio.name' | translate }}</mat-label>
+            <input matInput type="text" formControlName="name" />
+          </mat-form-field>
+  
+          <button type="submit" mat-raised-button color="primary">
+            <mat-icon *ngIf="loading$ | async">
+              <mat-spinner color="accent" diameter="20"> </mat-spinner>
+            </mat-icon>
+            {{ 'anms.portfolio.create-btn' | translate }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

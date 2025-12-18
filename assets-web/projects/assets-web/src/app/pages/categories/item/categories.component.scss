@@ -1,0 +1,49 @@
+@import '../../../../styles-variables';
+
+h3 {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  .mat-icon {
+    margin: 0 0 0 -8px;
+  }
+}
+
+ul {
+  display: block;
+  padding: 20px 0 0;
+  margin: 0;
+
+  li {
+    list-style: none;
+    display: flex;
+    form {
+      width: 100%;
+    }
+    button {
+      margin-left: 16px;
+      margin-top: 6px;
+    }
+  }
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}

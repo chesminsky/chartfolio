@@ -1,0 +1,128 @@
+<div class="overview background">
+  <div class="gradient">
+    <div class="container">
+      <div class="overview-grid">
+        <div>
+          <header class="overview__header">
+            <h2>{{ 'anms.overview.title' | translate }}</h2>
+          </header>
+
+          <div>
+            <anms-messages></anms-messages>
+          </div>
+
+          <div class="controls">
+            <div class="controls__row">
+              <div class="controls__col">
+                <ng-container *ngIf="portfolios$ | async as portfolios">
+                  <mat-form-field appearance="fill" class="full">
+                    <mat-label>{{ 'anms.overview.portfolios' | translate }}</mat-label>
+                    <mat-select [formControl]="selectedPortfolioCtrl" (selectionChange)="onChangePortfolio($event)">
+                      <mat-option [value]="allCode">
+                        {{ 'anms.overview.all' | translate }}
+                      </mat-option>
+                      <mat-option *ngFor="let portfolio of portfolios" [value]="portfolio._id">
+                        {{ portfolio.name }}
+                      </mat-option>
+                      <a [routerLink]="['/portfolios/new']" class="more-link">
+                        {{ 'anms.overview.add-portfolio' | translate }}
+                      </a>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-container>
+              </div>
+              <div class="controls__col">
+                <ng-container *ngIf="categories$ | async as categories">
+                  <mat-form-field appearance="fill" class="full">
+                    <mat-label>{{ 'anms.overview.categories' | translate }}</mat-label>
+                    <mat-select [formControl]="selectedCategoryCtrl">
+                      <mat-option *ngFor="let category of categories" [value]="category._id">
+                        <span *ngIf="CATEGORIES_TRANSLATIONS[category.code]; else categoryName">
+                          {{ CATEGORIES_TRANSLATIONS[category.code] | translate }}
+                        </span>
+                        <ng-template #categoryName>
+                          {{ category.name }}
+                        </ng-template>
+                      </mat-option>
+                      <a [routerLink]="['/categories/new']" class="more-link">
+                        {{ 'anms.overview.add-category' | translate }}
+                      </a>
+                    </mat-select>
+
+                    <button
+                      *ngIf="selectedCategoryCtrl.value"
+                      matSuffix
+                      mat-icon-button
+                      (click)="selectedCategoryCtrl.setValue(null); $event.stopPropagation()"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </ng-container>
+              </div>
+            </div>
+            <div class="links">
+              <ng-container *ngIf="!id">
+                <a mat-button [routerLink]="['/', 'portfolios']">
+                  <mat-icon>link</mat-icon>
+                  {{ 'anms.overview.go-to-portfolio' | translate }}
+                </a>
+              </ng-container>
+              <ng-container *ngIf="id">
+                <a mat-button [routerLink]="['/', 'portfolios', 'edit', id]">
+                  <mat-icon>link</mat-icon>
+                  {{ 'anms.overview.go-to' | translate }} {{ name }}
+                </a>
+                <a mat-button [routerLink]="['/', 'portfolios', 'edit', id, 'new']">
+                  <mat-icon>
+                    add
+                  </mat-icon>
+                  {{ 'anms.overview.add-asset' | translate }}
+                </a>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div [ngClass]="routeAnimationsElements">
+          <ng-container *ngIf="allOptions$ | async as options">
+            <anms-donut
+              [data]="data"
+              [priceMap]="priceMap"
+              [currency]="currency"
+              [categoryId]="selectedCategoryId"
+              [categoryMap]="categoryMap"
+              [options]="options"
+              *ngIf="!data || data.length > 0"
+            ></anms-donut>
+
+            <div *ngIf="data?.length === 0" class="no-data">
+              <div class="wallet">
+                <mat-icon>
+                  wallet
+                </mat-icon>
+              </div>
+
+              <div>
+                <div class="text">
+                  {{ 'anms.overview.no-data' | translate }}
+                </div>
+
+                <a
+                  *ngIf="defaultWalletId$ | async as defaultWalletId"
+                  mat-button
+                  [routerLink]="['/', 'portfolios', 'edit', defaultWalletId, 'new']"
+                >
+                  <mat-icon>
+                    add
+                  </mat-icon>
+                  {{ 'anms.overview.add-asset' | translate }}
+                </a>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

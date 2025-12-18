@@ -1,0 +1,47 @@
+@use '@angular/material' as mat;
+@import 'styles-variables';
+
+@import '@fontsource/roboto';
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/700.css';
+@import 'node_modules/bootstrap/scss/bootstrap-reboot';
+@import 'node_modules/bootstrap/scss/bootstrap-grid';
+@import 'styles-reset';
+
+@include mat.core();
+
+@import './themes/default-theme';
+@import './themes/light-theme';
+@import './themes/black-theme';
+@import './themes/nature-theme';
+
+@import 'styles-reset.scss-theme';
+@import './app/app/app.component.scss-theme';
+
+@import './base';
+
+@mixin custom-components-theme($theme) {
+  @include anms-styles-reset-theme($theme);
+  @include anms-app-component-theme($theme);
+}
+
+@include mat.all-component-themes($anms-theme);
+
+.default-theme {
+  @include custom-components-theme($anms-theme);
+}
+
+.light-theme {
+  @include custom-components-theme($anms-light-theme);
+  @include mat.all-component-colors($anms-light-theme);
+}
+
+.black-theme {
+  @include custom-components-theme($anms-black-theme);
+  @include mat.all-component-colors($anms-black-theme);
+}
+
+.nature-theme {
+  @include custom-components-theme($anms-nature-theme);
+  @include mat.all-component-colors($anms-nature-theme);
+}

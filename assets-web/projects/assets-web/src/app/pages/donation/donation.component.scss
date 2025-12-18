@@ -1,0 +1,64 @@
+@use '@angular/material' as mat;
+@import '../../../styles-variables';
+
+.wallet {
+  background: rgba(0, 0, 0, 0.04);
+  padding: 12px 40px 12px 12px;
+  position: relative;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  word-break: break-word;
+}
+
+.copy {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+
+.donation-row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.donation-col {
+  width: 100%;
+  padding: 0;
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)) {
+  .donation-row {
+    flex-direction: row;
+  }
+  
+  .donation-col {
+    width: 50%;
+    padding: 0 20px;
+  }
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.sent {
+  min-height: 198px;
+  text-align: center;
+  h4 {
+    font-size: 14px;
+  }
+  p {
+    font-size: 14px;
+  }
+  .bold {
+    font-weight: 500;
+  }
+  .check-icon {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: mat.get-color-from-palette($success-colors);
+    display: inline-block;
+  }
+}

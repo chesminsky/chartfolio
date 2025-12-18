@@ -1,0 +1,142 @@
+<div class="dividends background">
+  <div class="gradient">
+    <div class="container">
+      <div class="dividends-grid">
+        <div>
+          <header class="dividends__header">
+            <h2>{{ 'anms.dividends.title' | translate }}</h2>
+          </header>
+
+          <div>
+            <anms-messages></anms-messages>
+          </div>
+
+          <div class="controls">
+            <div class="controls__row">
+              <div class="controls__col">
+                <ng-container *ngIf="portfolios$ | async as portfolios">
+                  <mat-form-field appearance="fill" class="full">
+                    <mat-label>{{ 'anms.overview.portfolios' | translate }}</mat-label>
+                    <mat-select [formControl]="selectedPortfolioCtrl" (selectionChange)="onChangePortfolio($event)">
+                      <mat-option [value]="allCode">
+                        {{ 'anms.overview.all' | translate }}
+                      </mat-option>
+                      <mat-option *ngFor="let portfolio of portfolios" [value]="portfolio._id">
+                        {{ portfolio.name }}
+                      </mat-option>
+                      <a [routerLink]="['/portfolios/new']" class="more-link">
+                        {{ 'anms.overview.add-portfolio' | translate }}
+                      </a>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-container>
+              </div>
+              <div class="controls__col">
+                <ng-container *ngIf="allYears$ | async as allYears">
+                  <mat-form-field appearance="fill" class="full">
+                    <mat-label>{{ 'anms.dividends.year' | translate }}</mat-label>
+                    <mat-select [formControl]="selectedYearCtrl">
+                      <mat-option *ngFor="let year of allYears" [value]="year">
+                        {{ year }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div [ngClass]="routeAnimationsElements">
+          <ng-container *ngIf="dividentCalendarYear$ | async as dividentCalendarYear; else skeletons">
+            <anms-stacked-bars *ngIf="dividentCalendarYear?.length" [data]="dividentCalendarYear"></anms-stacked-bars>
+
+            <mat-list *ngFor="let m of dividentCalendarByMonths$ | async">
+              <div matListItemTitle>
+                {{ months[m.month] | translate }}
+              </div>
+              <mat-list-item *ngFor="let item of m.items">
+                <div matListItemIcon>
+                  <div class="list-icon" [style.background-color]="getColor(item.code)"></div>
+                </div>
+                <div matListItemLine>
+                  <div class="item-row">
+                    <div>
+                      {{ item.code }}
+                    </div>
+                    <div class="text-muted">
+                      {{ item.value | currency: item.currency:'symbol-narrow':getCurrencyFormat(item.currency) }}
+                    </div>
+                  </div>
+                </div>
+                <div matListItemLine>
+                  <div class="item-row">
+                    <div>
+                      {{ item.date | date: 'dd.MM.yyyy' }}
+                    </div>
+                    <div>
+                      <!-- 10.5% -->
+                    </div>
+                  </div>
+                </div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+
+            <mat-list *ngIf="dividentCalendarYear?.length">
+              <mat-list-item>
+                <div matListItemLine>
+                  <div class="item-row">
+                    <div>
+                      {{ 'anms.dividends.total' | translate }}
+                    </div>
+                    <div *ngIf="totalDividends$ | async as total">
+                      {{ total | currency: currency:'symbol-narrow':getCurrencyFormat(currency) }}
+                    </div>
+                  </div>
+                </div>
+              </mat-list-item>
+            </mat-list>
+
+            <div class="tax row" *ngIf="dividentCalendarYear?.length">
+              <div class="col-6">
+                <mat-slide-toggle class="toggle" [formControl]="taxCtrl">
+                  {{ 'anms.dividends.tax-included' | translate }}
+                </mat-slide-toggle>
+              </div>
+              <div class="col-6">
+                <mat-form-field appearance="outline" class="full">
+                  <mat-label>
+                    {{ 'anms.dividends.tax-value' | translate }}
+                  </mat-label>
+                  <input matInput type="number" min="0" max="100" [formControl]="taxValueCtrl" />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div *ngIf="dividentCalendarYear?.length === 0" class="no-data">
+              <div class="wallet">
+                <mat-icon>
+                  bar_chart
+                </mat-icon>
+              </div>
+
+              <div>
+                <div class="text">
+                  {{ 'anms.dividends.no-data' | translate }}
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #skeletons>
+            <div class="dividends-loader skeleton">
+              <ul>
+                <li class="skeleton-item" *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"></li>
+              </ul>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

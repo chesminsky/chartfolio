@@ -1,0 +1,21 @@
+.tag-overlay {
+	padding: 7px 12px;
+	background: #fafafa;
+	border-radius: 4px;
+	box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2), 0 3px 16px rgba(0, 0, 0, 0.12), 0 9px 12px rgba(0, 0, 0, 0.14);
+	max-width: 80vw;
+}
+
+:host {
+	display: block;
+}
+
+.more {
+    font-size: 18px;
+    margin: 0px;
+    position: relative;
+    left: 1px;
+    top: 0;
+    height: 14px;
+    width: 14px;
+}

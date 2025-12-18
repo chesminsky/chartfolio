@@ -1,0 +1,10 @@
+.empty {
+    pointer-events: none;
+    span {
+        color: #999;
+    }
+}
+
+.is-loading {
+    padding-right: 20px;
+}

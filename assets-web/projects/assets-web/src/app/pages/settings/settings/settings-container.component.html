@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>{{ 'anms.settings.title' | translate }}</h3>
+    </div>
+  </div>
+  <br />
+  <ng-container *ngIf="settings$ | async as settings">
+    <div class="row">
+      <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
+        <h4>{{ 'anms.settings.general.title' | translate }}</h4>
+        <div class="icon-form-field">
+          <div class="icon-mt">
+            <mat-icon color="accent">lang</mat-icon>
+          </div>
+          <mat-form-field>
+            <mat-label>
+              {{ 'anms.settings.general.language-placeholder' | translate }}
+            </mat-label>
+            <mat-select [ngModel]="settings.language" (selectionChange)="onLanguageSelect($event)" name="language">
+              <mat-option *ngFor="let l of languages" [value]="l.value">
+                {{ l.label | translate }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="icon-form-field" *ngIf="allCurrencies$ | async as all">
+          <div class="icon-mt">
+            <mat-icon color="accent">money</mat-icon>
+          </div>
+          <mat-form-field *ngIf="currencies$ | async as currencies">
+            <mat-label>
+              {{ 'anms.settings.general.currencies-label' | translate }}
+            </mat-label>
+            <mat-chip-grid #chipList>
+              <mat-chip-row
+                *ngFor="let currency of currencies"
+                [removable]="true"
+                (removed)="removeCurrency(currency, currencies)"
+              >
+                {{ currency }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip-row>
+              <input
+                [placeholder]="'anms.settings.general.currencies-search' | translate"
+                #currencyInput
+                [formControl]="currencyCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="addCurrency($event, all, currencies)"
+              />
+            </mat-chip-grid>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="currencySelected($event, currencies)">
+              <mat-option *ngFor="let currency of filteredCurrencies | async" [value]="currency.code">
+                {{ currency.name }} ({{ currency.code }})
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 group" [ngClass]="routeAnimationsElements">
+        <h4>{{ 'anms.settings.themes.title' | translate }}</h4>
+        <div class="icon-form-field">
+          <div class="icon-mt">
+            <mat-icon color="accent">brush</mat-icon>
+          </div>
+          <mat-form-field>
+            <mat-label>
+              {{ 'anms.settings.themes.placeholder' | translate }}
+            </mat-label>
+            <mat-select [ngModel]="settings.theme" (selectionChange)="onThemeSelect($event)" name="themes">
+              <mat-option *ngFor="let t of themes" [value]="t.value">
+                {{ t.label | translate }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="icon-form-field">
+          <div class="icon-mt">
+            <mat-icon color="accent">wb_incandescent</mat-icon>
+          </div>
+          <mat-label>{{ 'anms.settings.themes.night-mode' | translate }} </mat-label>
+          <mat-slide-toggle [checked]="settings.autoNightMode" (change)="onAutoNightModeToggle($event)">
+          </mat-slide-toggle>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="mobile">
+    <a class="link" href="mailto:chartfolio.online@gmail.com">
+      <mat-icon class="email">
+        email
+      </mat-icon>
+      <span>
+        Contact us
+      </span>
+    </a>
+  </div>
+</div>

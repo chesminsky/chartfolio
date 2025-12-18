@@ -1,0 +1,87 @@
+@import '../../../../styles-variables';
+
+:host {
+  display: block;
+  position: relative;
+}
+
+.donut {
+  position: relative;
+  @media (min-width: map-get($grid-breakpoints, lg)) {
+    padding-top: 10px;
+  }
+}
+
+.total {
+  position: absolute;
+  margin: 0 auto;
+  left: 50px;
+  right: 50px;
+  font-weight: 300;
+  z-index: 1;
+  text-align: center;
+  top: calc(50% - 24px);
+  font-size: 32px;
+
+  @media (min-width: map-get($grid-breakpoints, sm)) {
+    top: calc(50% - 48px);
+    font-size: 64px;
+  }
+}
+
+.legend {
+  padding: 0;
+  margin: 20px 0;
+  @media (min-width: map-get($grid-breakpoints, sm)) {
+    margin: 40px 0;
+  }
+  &__item {
+    list-style: none;
+    display: flex;
+    margin-bottom: 10px;
+    cursor: pointer;
+    &.is-hidden {
+      opacity: .6;
+      .legend__text-percent {
+        visibility: hidden;
+      }
+    }
+  }
+
+  &__marker {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 20px;
+  }
+
+  &__text {
+    vertical-align: middle;
+    line-height: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 20px;
+    & > * {
+      vertical-align: middle;
+    }
+    &-name {
+      width: 80%;
+      font-size: 14px;
+      padding-right: 8px;
+    }
+    &-percent {
+      width: 80px;
+      text-align: right;
+    }
+    &-value {
+      text-align: right;
+      font-size: 14px;
+    }
+    .mat-icon {
+      cursor: pointer;
+      line-height: 16px;
+    }
+  }
+}

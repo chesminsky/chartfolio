@@ -1,0 +1,16 @@
+<mat-chip-set>
+  <mat-chip (click)="open($event)">
+    {{ tags.length }} {{ tags.length === 1 ? 'tag' : 'tags' }}
+    <mat-icon class="more">more_vert</mat-icon>
+  </mat-chip>
+</mat-chip-set>
+
+<ng-template #tagOverlay>
+  <div class="tag-overlay">
+    <mat-chip-set>
+      <mat-chip *ngFor="let t of tags">
+        {{ t }}
+      </mat-chip>
+    </mat-chip-set>
+  </div>
+</ng-template>

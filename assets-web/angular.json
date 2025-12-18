@@ -1,0 +1,137 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "assets-web": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "changeDetection": "OnPush",
+          "style": "scss"
+        }
+      },
+      "root": "projects/assets-web",
+      "sourceRoot": "projects/assets-web/src",
+      "prefix": "anms",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/assets-web",
+            "index": "projects/assets-web/src/index.html",
+            "main": "projects/assets-web/src/main.ts",
+            "polyfills": "projects/assets-web/src/polyfills.ts",
+            "tsConfig": "projects/assets-web/tsconfig.app.json",
+            "assets": [
+              "projects/assets-web/src/favicon.ico",
+              "projects/assets-web/src/assets",
+              "projects/assets-web/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "projects/assets-web/src/styles.scss"
+            ],
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true,
+            "serviceWorker": true,
+            "ngswConfigPath": "projects/assets-web/ngsw-config.json"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/assets-web/src/environments/environment.ts",
+                  "with": "projects/assets-web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          },
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "assets-web:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "assets-web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "assets-web:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/assets-web/src/test.ts",
+            "polyfills": "projects/assets-web/src/polyfills.ts",
+            "tsConfig": "projects/assets-web/tsconfig.spec.json",
+            "karmaConfig": "projects/assets-web/karma.conf.js",
+            "assets": [
+              "projects/assets-web/src/favicon.ico",
+              "projects/assets-web/src/assets",
+              "projects/assets-web/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "projects/assets-web/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/assets-web/src/environments/environment.ts",
+                  "with": "projects/assets-web/src/environments/environment.test.ts"
+                }
+              ]
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/assets-web/tsconfig.app.json",
+              "projects/assets-web/tsconfig.spec.json",
+              "projects/assets-web/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/assets-web/e2e/protractor.conf.js",
+            "devServerTarget": "assets-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "assets-web:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

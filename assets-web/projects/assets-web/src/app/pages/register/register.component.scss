@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+@import '../../../styles-variables';
+
+.registered {
+  min-height: 198px;
+  text-align: center;
+  h4 {
+    font-size: 14px;
+  }
+  p {
+    font-size: 14px;
+  }
+  .bold {
+    font-weight: 500;
+  }
+  .check-icon {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: mat.get-color-from-palette($success-colors);
+    display: inline-block;
+  }
+}

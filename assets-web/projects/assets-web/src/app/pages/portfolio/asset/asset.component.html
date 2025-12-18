@@ -1,0 +1,281 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <header>
+        <div class="flex">
+          <button mat-icon-button type="button" (click)="back()">
+            <mat-icon>
+              arrow_back
+            </mat-icon>
+          </button>
+          <h3>{{ editMode ? name : ('anms.portfolio.asset.create-new' | translate) }}</h3>
+        </div>
+
+        <div *ngIf="editMode">
+          <button type="button" mat-raised-button (click)="delete()">
+            <mat-icon>delete</mat-icon>
+            {{ 'anms.portfolio.asset.delete' | translate }}
+          </button>
+        </div>
+      </header>
+      <form #formRef="ngForm" *ngIf="form" [formGroup]="form" (submit)="onSubmit()" class="add-form" autocomplete="off">
+        <mat-form-field appearance="fill" class="full" *ngIf="categories$ | async as categories">
+          <mat-label>
+            {{ 'anms.portfolio.asset.type' | translate }}
+          </mat-label>
+          <mat-select formControlName="type">
+            <mat-option [value]="AssetType.Currency">
+              {{ 'anms.portfolio.asset.types.currency' | translate }}
+            </mat-option>
+            <mat-option [value]="AssetType.Stocks">
+              {{ 'anms.portfolio.asset.types.stocks' | translate }}
+            </mat-option>
+            <mat-option [value]="AssetType.Moex">
+              {{ 'anms.portfolio.asset.types.moex' | translate }}
+            </mat-option>
+            <mat-option [value]="AssetType.Crypto">
+              {{ 'anms.portfolio.asset.types.crypto' | translate }}
+            </mat-option>
+            <mat-option [value]="AssetType.Custom">
+              {{ 'anms.portfolio.asset.types.custom' | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div *ngIf="form.get('type').value === AssetType.Custom">
+          <mat-form-field appearance="fill" class="full">
+            <mat-label>
+              {{ 'anms.portfolio.asset.code' | translate }}
+            </mat-label>
+            <input
+              [placeholder]="'anms.portfolio.asset.enter-code' | translate"
+              matInput
+              type="text"
+              formControlName="asset"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full">
+            <mat-label>
+              {{ 'anms.portfolio.asset.price' | translate }}
+            </mat-label>
+            <input
+              [placeholder]="'anms.portfolio.asset.enter-price' | translate"
+              matInput
+              type="number"
+              formControlName="assetPrice"
+            />
+          </mat-form-field>
+
+          <anms-autocomplete
+            [label]="'anms.portfolio.asset.currency' | translate"
+            [placeholder]="'anms.portfolio.asset.search-currency' | translate"
+            [ctrl]="form.get('assetCurrency')"
+            [assets]="filteredAssetCurrencies | async"
+          ></anms-autocomplete>
+        </div>
+
+        <ng-container *ngIf="form.get('type').value === AssetType.Currency">
+          <anms-autocomplete
+            [label]="'anms.portfolio.asset.code' | translate"
+            [placeholder]="'anms.portfolio.asset.search-currency' | translate"
+            [ctrl]="form.get('asset')"
+            [assets]="filteredCurrencies | async"
+          ></anms-autocomplete>
+        </ng-container>
+
+        <ng-container *ngIf="form.get('type').value === AssetType.Crypto">
+          <anms-autocomplete
+            [label]="'anms.portfolio.asset.code' | translate"
+            [placeholder]="'anms.portfolio.asset.search-crypto' | translate"
+            [ctrl]="form.get('asset')"
+            [assets]="filteredCrypto | async"
+          ></anms-autocomplete>
+        </ng-container>
+
+        <ng-container *ngIf="form.get('type').value === AssetType.Stocks">
+          <anms-autocomplete
+            [label]="'anms.portfolio.asset.code' | translate"
+            [placeholder]="'anms.portfolio.asset.search-stocks' | translate"
+            [ctrl]="form.get('asset')"
+            [assets]="filteredStocks | async"
+          ></anms-autocomplete>
+        </ng-container>
+
+        <ng-container *ngIf="form.get('type').value === AssetType.Moex">
+          <anms-autocomplete
+            [label]="'anms.portfolio.asset.code' | translate"
+            [placeholder]="'anms.portfolio.asset.search-stocks' | translate"
+            [ctrl]="form.get('asset')"
+            [assets]="filteredStocksMoex | async"
+          ></anms-autocomplete>
+        </ng-container>
+
+        <mat-form-field appearance="fill" class="full" *ngIf="form.get('asset').value">
+          <mat-label>
+            {{ 'anms.portfolio.asset.name' | translate }}
+          </mat-label>
+          <input
+            [placeholder]="'anms.portfolio.asset.enter-name' | translate"
+            matInput
+            type="text"
+            formControlName="assetName"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full" *ngIf="form.get('asset').value">
+          <mat-label>
+            {{ 'anms.portfolio.asset.value' | translate }}
+          </mat-label>
+          <input
+            [placeholder]="'anms.portfolio.asset.enter-value' | translate"
+            matInput
+            type="number"
+            formControlName="assetValue"
+          />
+        </mat-form-field>
+
+        <div class="mb-20" *ngIf="guessLoading$ | async">
+          <div class="mb-20">
+            {{ 'anms.portfolio.asset.search-for-categories' | translate }}
+          </div>
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+
+        <div *ngIf="categories$ | async as categories">
+          <mat-chip-listbox class="mb-20">
+            <mat-chip *ngFor="let c of categoriesCtrl.controls; index as i" [hidden]="!getChipLabel(c)">
+              {{ getChipLabel(c) }}
+              <mat-icon matChipRemove (click)="removeCategory(i)">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-listbox>
+
+          <ul class="category-list">
+            <li
+              class="category-item"
+              [hidden]="!showCategoryForm || i < categoriesCtrl.controls.length - 1"
+              *ngFor="let c of categoriesCtrl.controls; index as i"
+              formArrayName="categories"
+            >
+              <form [formGroupName]="i" autocomplete="off">
+                <div class="category-row">
+                  <div
+                    [ngClass]="{
+                      'category-one-third': compound[i],
+                      'category-half': !compound[i]
+                    }"
+                  >
+                    <mat-form-field appearance="fill" class="full">
+                      <mat-label>{{ 'anms.portfolio.asset.category' | translate }}</mat-label>
+                      <mat-select formControlName="category">
+                        <mat-option *ngFor="let cat of getCategoriesList(categories)" [value]="cat">
+                          {{
+                            CATEGORIES_TRANSLATIONS[cat.code]
+                              ? (CATEGORIES_TRANSLATIONS[cat.code] | translate)
+                              : cat.name
+                          }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div
+                    [ngClass]="{
+                      'category-two-third': compound[i],
+                      'category-half': !compound[i]
+                    }"
+                  >
+                    <div *ngFor="let pc of getOptionsFormArray(i).controls; index as j" formArrayName="options">
+                      <form [formGroupName]="j" autocomplete="off" class="options-form">
+                        <div class="category-row category-row--nested">
+                          <div
+                            [ngClass]="{
+                              'category-half': compound[i],
+                              'category-full': !compound[i]
+                            }"
+                          >
+                            <mat-form-field appearance="fill" class="full">
+                              <mat-label>{{ 'anms.portfolio.asset.option' | translate }}</mat-label>
+                              <mat-select formControlName="option">
+                                <mat-option *ngFor="let o of getOptions(i)" [value]="o">
+                                  {{
+                                    OPTIONS_TRANSLATIONS[o.code] ? (OPTIONS_TRANSLATIONS[o.code] | translate) : o.name
+                                  }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div *ngIf="compound[i]" class="category-half">
+                            <mat-form-field appearance="fill" class="full">
+                              <mat-label>
+                                {{ 'anms.portfolio.asset.percentage' | translate }}
+                              </mat-label>
+                              <input type="text" matInput formControlName="percentage" />
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <button *ngIf="j === 0" mat-icon-button class="add-btn" type="button" (click)="addOption(i)">
+                          <mat-icon>add</mat-icon>
+                        </button>
+
+                        <button
+                          *ngIf="j > 0"
+                          mat-icon-button
+                          class="add-btn"
+                          type="button"
+                          (click)="removeOption(i, j)"
+                        >
+                          <mat-icon>remove</mat-icon>
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="error-text" *ngIf="formRef.submitted && getOptionsFormArray(i).hasError('optionsNotUnique')">
+                {{ 'anms.portfolio.asset.error-options-not-unique' | translate }}
+              </div>
+              <div class="error-text" *ngIf="formRef.submitted && getOptionsFormArray(i).hasError('percentageSum')">
+                {{ 'anms.portfolio.asset.error-percentage-sum' | translate }}
+              </div>
+              <div class="category-footer">
+                <button type="button" mat-raised-button (click)="removeCategory(i)">
+                  <mat-icon>delete</mat-icon>
+                  {{ 'anms.portfolio.asset.delete-category' | translate }}
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="error-text" *ngIf="formRef.submitted && categoriesCtrl.hasError('categoriesNotUnique')">
+          {{ 'anms.portfolio.asset.error-categories-not-unique' | translate }}
+        </div>
+
+        <div class="add-category" *ngIf="form.get('asset').value && !(guessLoading$ | async)">
+          <button type="button" mat-raised-button (click)="clickAddCategory()" [disabled]="!categoriesCtrl.valid">
+            <mat-icon>add</mat-icon>
+            {{ 'anms.portfolio.asset.add-category' | translate }}
+          </button>
+        </div>
+
+        <button *ngIf="!editMode" mat-raised-button color="primary" type="submit">
+          <mat-icon *ngIf="loading$ | async">
+            <mat-spinner color="accent" diameter="20"> </mat-spinner>
+          </mat-icon>
+          {{ 'anms.portfolio.asset.create' | translate }}
+        </button>
+        <button *ngIf="editMode" mat-raised-button color="primary" type="submit">
+          <mat-icon *ngIf="loading$ | async">
+            <mat-spinner color="accent" diameter="20"> </mat-spinner>
+          </mat-icon>
+          {{ 'anms.portfolio.asset.update' | translate }}
+        </button>
+
+        <!-- <pre>
+          {{ form.value | json }}
+        </pre> -->
+      </form>
+    </div>
+  </div>
+</div>

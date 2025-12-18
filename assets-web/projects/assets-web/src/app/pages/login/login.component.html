@@ -1,0 +1,43 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <div class="login" *ngIf="showForm">
+        <h3>
+          {{ 'anms.login.login-title' | translate }}
+        </h3>
+
+        <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
+          <mat-form-field appearance="fill" class="full">
+            <mat-label>{{ 'anms.login.email' | translate }}</mat-label>
+            <input type="text" matInput formControlName="email" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="full password">
+            <mat-label>{{ 'anms.login.password' | translate }}</mat-label>
+            <input [type]="showPass ? 'text' : 'password'" matInput formControlName="password" />
+            <mat-icon matSuffix (click)="showPass = !showPass">remove_red_eye</mat-icon>
+          </mat-form-field>
+
+          <!-- <div class="error" *ngIf="(auth$ | async).errorMessage === 'wrongCredentials'">
+            {{ 'anms.login.invalid-credentials' | translate }}
+          </div> -->
+
+          <button mat-raised-button color="primary">{{ 'anms.login.login-button' | translate }}</button>
+        </form>
+
+        <div class="other">
+          <a class="link" [routerLink]="['/forgot-password']">
+            {{ 'anms.login.forgot-password' | translate }}
+          </a>
+        </div>
+        <div class="other">
+          <p>
+            {{ 'anms.login.dont-have-account' | translate }}
+          </p>
+          <a class="link link-big" [routerLink]="['/register']">{{ 'anms.login.register-link' | translate }}</a>
+        </div>
+
+        <anms-social-auth></anms-social-auth>
+      </div>
+    </div>
+  </div>
+</div>

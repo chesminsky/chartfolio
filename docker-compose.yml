@@ -1,0 +1,84 @@
+version: '3'
+services:
+  server:
+    container_name: assets-server
+    image: harbor.ru.dmitriy.space/library/chartfolio-server:latest
+    build: ./assets-server
+    # Ports removed - accessed via nginx proxy
+    env_file:
+      - .env
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_SECRET=${GOOGLE_SECRET}
+      - PORT=3000
+      - ASSETS_LIMIT_FREE=${ASSETS_LIMIT_FREE:-20}
+      - ASSETS_LIMIT_PRO=${ASSETS_LIMIT_PRO:-1000}
+      - CATEGORIES_LIMIT_FREE=${CATEGORIES_LIMIT_FREE:-10}
+      - CATEGORIES_LIMIT_PRO=${CATEGORIES_LIMIT_PRO:-50}
+      - FACEBOOK_APP_ID=${FACEBOOK_APP_ID}
+      - FACEBOOK_APP_SECRET=${FACEBOOK_APP_SECRET}
+      - MAIL_USER=${MAIL_USER}
+      - MAIL_PASS=${MAIL_PASS}
+      - FRONTEND_URL=${ASSETS_FRONTEND_URL}
+      - AUTH_URL=${ASSETS_AUTH_URL}
+      - TINKOFF_TOKEN=${TINKOFF_TOKEN}
+      - PROXY_IP=${PROXY_IP}
+      - PROXY_PORT=${PROXY_PORT}
+      - PROXY_USERNAME=${PROXY_USERNAME}
+      - PROXY_PASS=${PROXY_PASS}
+      - PROXY2_URL=${PROXY2_URL}
+      - CURRENCY_TOKEN=${CURRENCY_TOKEN}
+      - CURRENCY_TOKEN_RESERVE=${CURRENCY_TOKEN_RESERVE}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    networks:
+      - chartfolio-network
+
+  web:
+    container_name: assets-web
+    image: harbor.ru.dmitriy.space/library/chartfolio-web:latest
+    build: ./assets-web
+    # Ports removed - accessed via nginx proxy
+    networks:
+      - chartfolio-network
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: chartfolio-certbot
+    restart: unless-stopped
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --quiet --no-self-upgrade; sleep 12h & wait $${!}; done;'"
+    networks:
+      - chartfolio-network
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: chartfolio-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+    depends_on:
+      - server
+      - web
+    networks:
+      - chartfolio-network
+
+volumes:
+  certbot-etc:
+    driver: local
+  certbot-www:
+    driver: local
+
+networks:
+  chartfolio-network:
+    driver: bridge
+

@@ -1,0 +1,24 @@
+<mat-form-field appearance="fill" class="full">
+  <mat-label>
+    {{ label }}
+  </mat-label>
+  <input
+    (blur)="checkAutocomplete(auto)"
+    [placeholder]="placeholder"
+    type="text"
+    matInput
+    [formControl]="ctrl"
+    [matAutocomplete]="auto"
+  />
+  <div *ngIf="ctrl.value && !assets && !ctrl.disabled" class="is-loading" matSuffix>
+    <mat-progress-spinner mode="indeterminate" [diameter]="20"> </mat-progress-spinner>
+  </div>
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngIf="assets?.length === 0" class="empty">
+      <span>
+        {{ 'anms.portfolio.shared.autocomplete.no_results' | translate }}
+      </span>
+    </mat-option>
+    <mat-option *ngFor="let a of assets" [value]="a"> {{ a.name }} ( {{ a.code }} ) </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

@@ -1,0 +1,283 @@
+{
+	", ": ", ",
+	"anms": {
+		"categories": {
+			"add": "Add new group",
+			"add-option": "Add category",
+			"codes": {
+				"ASSET_TYPE": "Asset type",
+				"INCOME_GENERATION": "Income generation",
+				"LIQUIDITY": "Liquidity",
+				"MARKETS": "Markets",
+				"PURPOSE_OR_GOAL": "Purpose or goal",
+				"RISK_PROFILE": "Risk profile",
+				"SECTOR_INDUSTRY": "Sector industry"
+			},
+			"create": "Create",
+			"create-new": "Create new group",
+			"delete": "Delete category group",
+			"group-name": "Group",
+			"name": "Group name",
+			"no-data": "You have no category groups",
+			"option": "Category",
+			"option-codes": {
+				"AGGRESSIVE": "Aggressive",
+				"ANNUITIES": "Annuities",
+				"BONDS": "Bonds",
+				"CASH": "Cash",
+				"COMMODITIES": "Commodities",
+				"COMMUNICATION_SERVICES": "Communication services",
+				"CONSERVATIVE": "Conservative",
+				"CONSUMER_DISCRETIONARY": "Consumer discretionary",
+				"CONSUMER_STAPLES": "Consumer staples",
+				"CRYPTO": "Crypto",
+				"DEVELOPED": "Developed",
+				"DIVIDEND_PAYING_STOCKS": "Dividend paying stocks",
+				"EMERGENCY_FUND": "Emergency fund",
+				"EMERGING": "Emerging",
+				"ENERGY": "Energy",
+				"FINANCIAL_SERVICES": "Financial services",
+				"HEALTHCARE": "Healthcare",
+				"ILLIQUID_ASSETS": "Illiquid assets",
+				"INDUSTRIALS": "Industrials",
+				"INFORMATION_TECHNOLOGY": "Information technology",
+				"INTEREST_PAYING_BONDS": "Interest paying bonds",
+				"LIQUID_ASSETS": "Liquid assets",
+				"LONG_TERM_GROWTH": "Long term growth",
+				"MATERIALS": "Materials",
+				"MODERATE": "Moderate",
+				"REAL_ESTATE": "Real estate",
+				"REIT": "REIT",
+				"RENTAL_PROPERTIES": "Rental properties",
+				"RETIREMENT_SAVINGS": "Retirement savings",
+				"RUSSIA": "Russia",
+				"SEMI_LIQUID_ASSETS": "Semi liquid assets",
+				"SHORT_TERM_GOALS": "Short term goals",
+				"STOCKS": "Stocks",
+				"USA": "USA",
+				"UTILITIES": "Utilities"
+			},
+			"options": "Categories",
+			"update": "Update"
+		},
+		"description": {
+			"dividends": "Dividends",
+			"overview": "With Chartfolio, you can easily track your assets, including currencies, stocks, and cryptocurrencies. View your total value in any currency and analyze your portfolio with custom categories and donut charts! Take control of your investments!"
+		},
+		"dividends": {
+			"no-data": "No dividends for this year",
+			"tax-included": "Including tax",
+			"tax-value": "Tax (%)",
+			"title": "Dividends calendar",
+			"total": "Total dividends",
+			"year": "Year"
+		},
+		"donation": {
+			"copied": "Copied",
+			"hash": "Please, paste your transaction hash here",
+			"payment-option": "Payment option",
+			"success-text": "We will reach you soon!",
+			"success-title": "Your request has been sent",
+			"upgrade": "Upgrade an account"
+		},
+		"login": {
+			"already-have-account": "Already have an account?",
+			"dont-have-account": "Don't have an account?",
+			"email": "Email address",
+			"facebook-login": "Continue with Facebook",
+			"forgot-password": "Forgot your password?",
+			"forgot-password-button": "Reset your password",
+			"forgot-password-header": "Check your email",
+			"forgot-password-text-post": "Follow the link from that email to reset your password.",
+			"forgot-password-text-pre": "We have sent an email to",
+			"forgot-password-title": "Forgot your password?",
+			"google-login": "Continue with Google",
+			"have-not-received-code": "Have not received the email?",
+			"invalid-email": "Invalid email",
+			"login-button": "Login",
+			"login-link": "Login",
+			"login-title": "Welcome",
+			"or": "OR",
+			"password": "Password",
+			"password-not-match": "Password does not match",
+			"register-button": "Continue",
+			"register-link": "Sign up",
+			"register-title": "Create your account",
+			"registered-header": "Please verify your email",
+			"registered-text-post": "Just click on the link in that email to complete your registration. If you don't see it, you may check your spam folder.",
+			"registered-text-pre": "You are almost there! We sent an email to",
+			"resend-email-verification": "Resend email verification",
+			"weak-password": "Password must contain more than 8 characters, at least 1 upper case letter, at least 1 digit"
+		},
+		"menu": {
+			"add-portfolio": "Add portfolio",
+			"categories": "Categories",
+			"dividends": "Dividends",
+			"login": "Login",
+			"logout": "Logout",
+			"more": "Add more...",
+			"overview": "Overview",
+			"portfolios": "Portfolios",
+			"register": "Register",
+			"settings": "Settings"
+		},
+		"notification": {
+			"asset-created": "You have created a new asset",
+			"asset-deleted": "Asset deleted",
+			"asset-edited": "You have edited an asset",
+			"auth-error": "Authentication error",
+			"category-created": "You have created a new category group",
+			"category-deleted": "Category group deleted",
+			"category-edited": "You have edited a category group",
+			"email-verified": "Your email has been verified. Please login to your account",
+			"email-verify-link-invalid": "This email verification link is not valid",
+			"file-error": "File error. Try again",
+			"file-format-error": "Wrong file format. Should be .csv, .xlsx",
+			"password-changed": "Password changed",
+			"verification-email-sent": "Email have been sent"
+		},
+		"overview": {
+			"add-asset": "Add assets",
+			"add-category": "Add categories...",
+			"add-portfolio": "Add portfolio...",
+			"all": "Summary",
+			"categories": "Categories",
+			"go-to": "Go to",
+			"go-to-portfolio": "Go to portfolios",
+			"no-data": "Your portfolio is empty",
+			"not-authenticated": "You are not authenticated. \n All your changes will be stored locally on your device. They can be lost if app is updated or cache is cleared. To save your data, please login or register",
+			"portfolios": "Portfolio",
+			"run-out-of-limits": "You have exceeded the number of assets or categories. In order to continue please",
+			"title": "Portofolio overview",
+			"upgrade": "upgrade your account"
+		},
+		"portfolio-name": "Name",
+		"portfolio": {
+			"add-asset": "Add asset",
+			"asset": {
+				"add-category": "Add category group",
+				"category": "Category group",
+				"code": "Asset code",
+				"create": "Create",
+				"create-new": "Create new asset",
+				"currency": "Select currency",
+				"delete": "Delete asset",
+				"delete-category": "Delete group",
+				"enter-code": "Choose asset code",
+				"enter-name": "Enter name",
+				"enter-price": "Enter price",
+				"enter-value": "Enter value",
+				"error-categories-not-unique": "Duplicated groups",
+				"error-options-not-unique": "Duplicated categories",
+				"error-percentage-sum": "Categories ratio summary should be equal 100%",
+				"name": "Asset name",
+				"option": "Category",
+				"percentage": "Ratio, %",
+				"price": "Price per unit",
+				"search-crypto": "Search crypto",
+				"search-currency": "Search currency",
+				"search-for-categories": "Searching for categories...",
+				"search-stocks": "Search stocks",
+				"type": "Select asset type",
+				"types": {
+					"crypto": "Crypto (Coingecko)",
+					"currency": "Currencies",
+					"custom": "Custom",
+					"moex": "Stocks, bonds, etc. (MOEX)",
+					"stocks": "Stocks, bonds, etc. (Yahoo finance)"
+				},
+				"update": "Update",
+				"value": "Value"
+			},
+			"categories": "Categories",
+			"create": "Create new portfolio",
+			"create-btn": "Create",
+			"import": "Import from Yahoo Finance",
+			"import-tooltip": "If you are using Yahoo Finance, you can export your assets to csv file, and import here. It's a pro feature.",
+			"name": "Name",
+			"no-assets-data": "You have no assets",
+			"no-data": "You have no portfolios",
+			"price": "Price",
+			"shared": {
+				"autocomplete": {
+					"no_results": "Nothing found"
+				}
+			},
+			"symbol": "Symbol",
+			"total": "Total",
+			"value": "Value"
+		},
+		"reset-password": {
+			"confirm-password": "Confirm current password",
+			"email": "Email",
+			"old-password": "Current password",
+			"password": "New password",
+			"submit-button": "Confirm",
+			"title": "Reset password"
+		},
+		"settings": {
+			"general": {
+				"currencies-label": "Preferred currencies",
+				"currencies-search": "Search...",
+				"language-placeholder": "Select language",
+				"title": "General settings"
+			},
+			"themes": {
+				"blue": "Blue",
+				"dark": "Dark",
+				"light": "Light",
+				"nature": "Nature",
+				"night-mode": "Night mode",
+				"placeholder": "Theme selection",
+				"title": "Theming"
+			},
+			"title": "Settings"
+		}
+	},
+	"server": {
+		"errors": {
+			"api": {
+				"crypto": "Crypto API Error",
+				"currency": "Currency API Error",
+				"moex": "MOEX API Error",
+				"yahoo": "Yahoo API Error"
+			},
+			"assets": {
+				"limit": "Maximum count of assets reached"
+			},
+			"auth": {
+				"already-registered": "User with this email has been already registered",
+				"change-password": "Password change error",
+				"error": "Authorization error",
+				"invalid-credentials": "Invalid credentials",
+				"login-sent-recently": "Verification code has been already sent recently. Timeout is 3 min",
+				"no-password-provided": "No password provided",
+				"reset_password_sent_recently": "Password change code has been already sent recently. Timeout is 3 min",
+				"user-not-found": "User not found",
+				"user-not-registered": "User not registered",
+				"user-not-verified": "User not verified",
+				"wrong-current-password": "Wrong password",
+				"wrong-email-token": "Wrong email token"
+			},
+			"categories": {
+				"limit": "Maximum count of categories reached"
+			}
+		}
+	},
+	"shared": {
+		"months": {
+			"april": "April",
+			"august": "August",
+			"december": "December",
+			"february": "February",
+			"january": "January",
+			"july": "July",
+			"june": "June",
+			"march": "March",
+			"may": "May",
+			"november": "November",
+			"october": "October",
+			"september": "September"
+		}
+	}
+}

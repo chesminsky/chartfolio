@@ -1,0 +1,216 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assets-server
+  namespace: chartfolio
+  labels:
+    app: assets-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: assets-server
+  template:
+    metadata:
+      labels:
+        app: assets-server
+    spec:
+      tolerations:
+      - key: "arch"
+        operator: "Equal"
+        value: "arm64"
+        effect: "NoSchedule"
+
+      containers:
+      - name: assets-server
+        image: harbor.ru.dmitriy.space/library/chartfolio-server:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PORT
+          value: "3000"
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: MONGODB_URI
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: JWT_SECRET
+        - name: GOOGLE_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: GOOGLE_CLIENT_ID
+        - name: GOOGLE_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: GOOGLE_SECRET
+        - name: FACEBOOK_APP_ID
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: FACEBOOK_APP_ID
+        - name: FACEBOOK_APP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: FACEBOOK_APP_SECRET
+        - name: MAIL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: MAIL_USER
+        - name: MAIL_PASS
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: MAIL_PASS
+        - name: FRONTEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: FRONTEND_URL
+        - name: AUTH_URL
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: AUTH_URL
+        - name: ASSETS_LIMIT_FREE
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: ASSETS_LIMIT_FREE
+        - name: ASSETS_LIMIT_PRO
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: ASSETS_LIMIT_PRO
+        - name: CATEGORIES_LIMIT_FREE
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: CATEGORIES_LIMIT_FREE
+        - name: CATEGORIES_LIMIT_PRO
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: CATEGORIES_LIMIT_PRO
+        - name: TINKOFF_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: TINKOFF_TOKEN
+        - name: PROXY_IP
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: PROXY_IP
+        - name: PROXY_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: assets-config
+              key: PROXY_PORT
+        - name: PROXY_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: PROXY_USERNAME
+        - name: PROXY_PASS
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: PROXY_PASS
+        - name: CURRENCY_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: CURRENCY_TOKEN
+        - name: CURRENCY_TOKEN_RESERVE
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: CURRENCY_TOKEN_RESERVE
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: assets-server-secrets
+              key: OPENAI_API_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: assets-server
+  namespace: chartfolio
+spec:
+  selector:
+    app: assets-server
+  ports:
+  - port: 3000
+    targetPort: 3000
+    protocol: TCP
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: assets-web
+  namespace: chartfolio
+spec:
+  selector:
+    app: assets-web
+  ports:
+  - port: 4000
+    targetPort: 4000
+    protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chartfolio-ingress
+  namespace: chartfolio
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - chartfolio.online
+      secretName: chartfolio-online-tls
+  rules:
+    - host: chartfolio.online
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: assets-server
+                port:
+                  number: 3000
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: assets-server
+                port:
+                  number: 3000
+          - path: /logs
+            pathType: Prefix
+            backend:
+              service:
+                name: assets-server
+                port:
+                  number: 3000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: assets-web
+                port:
+                  number: 4000

@@ -1,0 +1,87 @@
+@import '../../styles-variables';
+
+h3 {
+  line-height: 36px;
+  margin: 0;
+}
+
+header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+mat-row {
+  position: relative;
+  .delete {
+    display: none;
+  }
+  &:hover {
+    .delete {
+      display: block;
+    }
+  }
+}
+
+mat-cell {
+  word-break: break-word;
+}
+
+.mat-column-delete {
+  text-align: right;
+  max-width: 60px;
+  @media (max-width: map-get($grid-breakpoints, lg)) {
+    display: none;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)) {
+  mat-row:hover {
+    background: rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+  }
+}
+
+.mobile-actions {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  width: 0;
+  text-align: center;
+  transition: all ease-in-out 0.1s;
+  overflow: hidden;
+  &.is-active {
+    width: 100px;
+  }
+  button {
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    left: 50%;
+    margin-left: -20px;
+  }
+}
+
+.actions-wrapper {
+  position: relative;
+  height: 48px;
+}
+
+.nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-right: 8px;
+}
+
+.no-data {
+  line-height: 48px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}

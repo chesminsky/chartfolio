@@ -1,0 +1,104 @@
+@import '../../../shared/table-layout.scss';
+
+.header {
+  display: flex;
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .edit-icon {
+    visibility: hidden;
+  }
+
+  h3 {
+    position: relative;
+    padding-right: 30px;
+    mat-icon {
+      cursor: pointer;
+    }
+    &:hover {
+      .edit-icon {
+        visibility: visible;
+      }
+    }
+  }
+
+  .edit-name-wrap {
+    display: flex;
+    align-items: center;
+    mat-icon {
+      margin-left: 8px;
+    }
+  }
+
+  .edit-name {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: auto;
+  }
+}
+
+.chip-list {
+  padding: 10px 0;
+}
+
+.mat-column-name {
+  @media (max-width: map-get($grid-breakpoints, lg)) {
+    display: none;
+  }
+}
+
+.import {
+  margin-top: 40px;
+  white-space: nowrap;
+  &-info {
+    padding: 0 24px;
+    display: inline-block;
+    vertical-align: middle;
+    mat-icon {
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+}
+
+.mat-column-code {
+  max-width: 30%;
+}
+.mat-column-value {
+  max-width: 15%;
+}
+.mat-column-price {
+  max-width: 30%;
+}
+.mat-column-categories {
+  max-width: 45%;
+}
+
+@media (min-width: map-get($grid-breakpoints, lg)) {
+  .mat-column-code {
+    max-width: 15%;
+  }
+  .mat-column-name {
+    max-width: 15%;
+  }
+  .mat-column-value {
+    max-width: 10%;
+  }
+  .mat-column-price {
+    max-width: 10%;
+  }
+  .mat-column-categories {
+    max-width: 50%;
+  }
+}
+
+.mat-chip {
+  white-space: nowrap;
+}

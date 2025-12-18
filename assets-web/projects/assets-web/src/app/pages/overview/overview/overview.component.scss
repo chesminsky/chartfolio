@@ -1,0 +1,107 @@
+@import '../../../../styles-variables';
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+.controls {
+  margin-bottom: 10px;
+
+  &__row {
+    display: flex;
+    margin: 0 -15px -15px -15px;
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      display: block;
+      margin: 0 -15px;
+    }
+  }
+
+  &__col {
+    width: 50%;
+    padding: 0 15px;
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      width: 100%;
+    }
+  }
+
+  .links {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -6px;
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      margin: 0;
+    }
+  }
+}
+
+.overview {
+  &__header {
+    display: flex;
+    margin-bottom: 20px;
+    display: none;
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      display: block;
+    }
+    .mat-icon {
+      padding: 8px 0;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.overview-grid {
+  @media (min-width: map-get($grid-breakpoints, lg)) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin: 0 -60px;
+    & > * {
+      width: 50%;
+      padding: 0 60px;
+    }
+  }
+}
+
+a {
+  fa-icon,
+  mat-icon {
+    position: relative;
+    top: -3px;
+    left: -1px;
+  }
+}
+
+.more-link {
+  line-height: 42px;
+  padding: 0 16px;
+  display: block;
+  white-space: nowrap;
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.no-data {
+  text-align: center;
+
+  .wallet {
+    padding: 80px 0 20px;
+    mat-icon {
+      font-size: 120px;
+      width: auto;
+      height: auto;
+      color: rgba(0, 0, 0, 0.04);
+    }
+  }
+  .text {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #666;
+  }
+}

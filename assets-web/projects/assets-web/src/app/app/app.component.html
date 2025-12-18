@@ -1,0 +1,217 @@
+<div [class]="'theme-wrapper ' + (theme$ | async)">
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="push">
+      <mat-nav-list>
+        <a
+          mat-list-item
+          *ngFor="let item of navigationSideMenu"
+          (click)="sidenav.close()"
+          [routerLink]="[item.link]"
+          routerLinkActive="active"
+        >
+          {{ item.label | translate }}
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <div class="wrapper">
+      <div
+        class="toolbar"
+        [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'"
+        [class.mat-elevation-z4]="stickyHeader$ | async"
+      >
+        <mat-toolbar color="primary">
+          <a [routerLink]="['/']" class="logo">
+            CHARTF
+            <ng-container *ngTemplateOutlet="logo"></ng-container>
+            LIO
+          </a>
+
+          <span class="d-none d-md-inline">
+            <button
+              type="button"
+              mat-button
+              class="nav-button"
+              *ngFor="let item of navigation"
+              [routerLink]="[item.link]"
+              routerLinkActive="active"
+            >
+              {{ item.label | translate }}
+            </button>
+          </span>
+
+          <div class="spacer"></div>
+
+          <button
+            type="button"
+            mat-button
+            mat-stroked-button
+            color="accent"
+            *ngIf="!(isAuthenticated$ | async)"
+            (click)="onLoginClick()"
+          >
+            {{ 'anms.menu.login' | translate }}
+          </button>
+
+          <ng-container *ngIf="user$ | async as user">
+            <button *ngIf="!user.picture" type="button" mat-icon-button [matMenuTriggerFor]="toolbarUserMenu">
+              <mat-icon>
+                account_circle
+              </mat-icon>
+            </button>
+            <div class="avatar" *ngIf="user.picture" [matMenuTriggerFor]="toolbarUserMenu">
+              <img [src]="user.picture" />
+            </div>
+          </ng-container>
+
+          <mat-menu #toolbarUserMenu="matMenu">
+            <div class="user" mat-menu-item>
+              {{ username$ | async }}
+              <span
+                class="user-badge info-notification-overlay"
+                *ngIf="userplan$ | async as plan"
+                [ngClass]="{ pointer: plan === 'free' }"
+                (click)="onPlanClick(plan)"
+              >
+                {{ plan }}
+              </span>
+            </div>
+            <button type="button" mat-menu-item (click)="onLogoutClick()">
+              <mat-icon>
+                power_settings_new
+              </mat-icon>
+              <span>{{ 'anms.menu.logout' | translate }}</span>
+            </button>
+          </mat-menu>
+
+          <button type="button" mat-icon-button routerLink="settings" class="d-none d-sm-inline">
+            <mat-icon>
+              settings
+            </mat-icon>
+          </button>
+
+          <span *ngIf="currency$ | async as currency">
+            <span *ngIf="currencies$ | async as currencies">
+              <mat-select
+                class="currency-select"
+                panelClass="currency-dropdown"
+                #currencySelect
+                [ngModel]="currency"
+                (selectionChange)="onCurrencySelect($event)"
+              >
+                <mat-option *ngFor="let c of currencies" [value]="c">
+                  {{ c }}
+                </mat-option>
+                <a [routerLink]="['settings']" (click)="currencySelect.close()" class="more-link">
+                  {{ 'anms.menu.more' | translate }}
+                </a>
+              </mat-select>
+            </span>
+          </span>
+        </mat-toolbar>
+      </div>
+
+      <div
+        class="content"
+        [@routeAnimations]="
+          o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title
+        "
+      >
+        <router-outlet #o="outlet"> </router-outlet>
+
+        <div class="app-loading" *ngIf="!o.isActivated">
+          <div class="logo">
+            <svg class="spinner" viewBox="25 25 50 50">
+              <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="row desktop-row">
+          <div class="col-6">
+            <a href="mailto:chartfolio.online@gmail.com">Contact us</a>
+          </div>
+          <div class="col-6 signature">
+            &#169; <span class="year">{{ year }}</span> - Chartfolio
+            <br class="d-block d-sm-none" />
+
+            {{ version }} <span *ngIf="!isProd">[{{ envName }}]</span>
+          </div>
+        </div>
+
+        <div class="row mobile-row mobile-footer">
+          <a class="col-one-fifth" [routerLink]="['overview']">
+            <ng-container *ngTemplateOutlet="logo"></ng-container>
+          </a>
+          <a class="col-one-fifth" [routerLink]="['portfolios']">
+            <mat-icon>
+              wallet
+            </mat-icon>
+          </a>
+          <a class="col-one-fifth" [routerLink]="['categories']">
+            <mat-icon>
+              list
+            </mat-icon>
+          </a>
+          <a class="col-one-fifth" [routerLink]="['dividends']">
+            <mat-icon>
+              bar_chart
+            </mat-icon>
+          </a>
+          <a class="col-one-fifth" [routerLink]="['settings']">
+            <mat-icon>
+              settings
+            </mat-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-container>
+</div>
+
+<ng-template #logo>
+  <svg
+    style="margin: -5px -3px 0px -4px"
+    width="20px"
+    height="20px"
+    viewBox="0 0 239 242"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <path
+        d="M59.4309475,171.202606 C72.546277,186.677524 92.1260785,196.5 114,196.5 C132.592721,196.5 149.527902,189.403288 162.244614,177.770923 L195.561559,212.62839 C174.156351,230.629911 146.36851,241.5 116,241.5 C79.6322811,241.5 46.9654865,225.910879 24.5293545,201.153852 Z"
+        id="Combined-Shape"
+        stroke="#EEEEEE"
+        fill="#F7F7FA"
+      ></path>
+      <path
+        d="M2.79711572,101.766054 L43.8088919,111.312129 C42.9499506,115.742416 42.5,120.318664 42.5,125 C42.5,140.200605 47.2435316,154.293265 55.3308251,165.878664 L22.5323686,193.397715 C8.68271707,174.250546 0.5,150.597577 0.5,125 C0.5,117.041733 1.29088127,109.271432 2.79711572,101.766054 Z"
+        id="Combined-Shape"
+        stroke="#EEEEEE"
+        fill="#F7F7FA"
+      ></path>
+      <path
+        d="M60.5071215,29.4328984 L78.2044299,63.091906 C62.6422985,72.1093164 50.794502,86.8263622 45.5162165,104.386953 L8.3307393,96.185113 C16.1137798,67.5757313 35.205374,43.625877 60.5071215,29.4328984 Z"
+        id="Combined-Shape"
+        stroke="#EEEEEE"
+        fill="#F7F7FA"
+      ></path>
+      <path
+        d="M111.353244,20.9245784 L112.21456,53.5218598 C102.230003,53.7665963 92.753133,56.0582359 84.1875434,59.992849 L70.0823577,32.1205346 C82.7258763,26.0571977 96.6512271,22.1604997 111.353244,20.9245784 Z"
+        id="Combined-Shape"
+        stroke="#EEEEEE"
+        fill="#F7F7FA"
+      ></path>
+      <path
+        d="M116.743719,0.529633087 C150.434098,1.25803218 180.828223,15.3694228 202.822184,37.7596564 C224.889094,60.2241549 238.5,91.0225806 238.5,125 C238.5,158.172011 225.526728,188.313962 204.377095,210.628857 L167.117906,172.862542 C178.544253,160.189641 185.5,143.40713 185.5,125 C185.5,105.896588 178.008089,88.5430147 165.80218,75.7171044 C153.63556,62.9324791 136.785174,54.6465947 118.002277,53.6101404 Z"
+        id="Combined-Shape"
+        stroke="#EEEEEE"
+        fill="#F7F7FA"
+      ></path>
+    </g>
+  </svg>
+</ng-template>

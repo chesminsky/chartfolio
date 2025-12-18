@@ -1,0 +1,138 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <div class="donation-row">
+        <div class="donation-col">
+          <ng-container *ngIf="translate.currentLang === 'en'">
+            <p>Dear valued user,</p>
+
+            <p>
+              Thank you so much for using our app and for your support of our project.
+            </p>
+
+            <p>
+              As a small, independent app developer, we rely on the support of users like you to help fund the
+              development and maintenance of our app. We wanted to reach out and ask if you would consider making a
+              small
+              <span class="bold">donation</span> to support our project. Any amount would be greatly appreciated would
+              be greatly appreciated and would help us to continue improving and updating the app for all of our users.
+            </p>
+
+            <p>
+              As a thank you for your support, we would like to offer you
+              <span class="bold">unlimited storage for assets and categories</span> . We hope that this will provide
+              even more value to you as you continue to use our app.
+            </p>
+
+            <p>
+              Thank you in advance for your generosity and for being a valued user of our app. We hope that you continue
+              to enjoy using it and that it brings value to your life.
+            </p>
+
+            <p>
+              Sincerely, Chartfolio team.
+            </p>
+          </ng-container>
+
+          <ng-container *ngIf="translate.currentLang === 'ru'">
+            <p>
+              Добрый день!
+            </p>
+
+            <p>
+              Спасибо за ваш интерес к нашему приложению. Мы рады, что оно оказалось полезным для вас.
+            </p>
+
+            <p>
+              Мы будем очень благодарны, если вы сможете <span class="bold">пожертвовать</span> небольшую сумму на
+              развитие проекта. В этом случае мы с радостью предложим вам
+              <span class="bold">безлимитное количество активов и категорий</span>.
+            </p>
+
+            <p>
+              Благодарим вас за поддержку и надеемся на дальнейшее сотрудничество.
+            </p>
+
+            <p>
+              С уважением, команда Chartfolio
+            </p>
+          </ng-container>
+
+          <ng-container *ngIf="translate.currentLang === 'cn'">
+            <p>尊敬的用户您好，</p>
+
+            <p>
+              非常感谢您使用我们的应用并支持我们的项目。
+            </p>
+
+            <p>
+              作为一个小型独立应用开发者，我们依赖像您这样的用户支持来资助我们应用的开发和维护。我们想联系您，并希望您考虑给我们的项目捐赠一笔<span
+                class="bold"
+                >小额资助</span
+              >。任何金额的捐赠都将不胜感激，并将帮助我们继续改进和更新应用，造福所有用户。
+            </p>
+
+            <p>
+              作为对您支持的感谢，我们愿意为您提供<span class="bold">资产和分类的无限存储空间</span
+              >。希望这将为您在使用我们的应用时提供更多价值。
+            </p>
+
+            <p>
+              非常感谢您慷慨解囊，成为我们应用的尊贵用户。希望您继续享受使用我们的应用，并且它能为您的生活带来更多价值。
+            </p>
+
+            <p>
+              此致，Chartfolio团队敬上。
+            </p>
+          </ng-container>
+        </div>
+        <div class="donation-col">
+          <div *ngIf="sent" class="sent">
+            <mat-icon class="check-icon">check</mat-icon>
+            <div class="sent-text">
+              <h4>
+                {{ 'anms.donation.success-title' | translate }}
+              </h4>
+              <p>
+                {{ 'anms.donation.success-text' | translate }}
+              </p>
+            </div>
+          </div>
+          <form *ngIf="!sent" [formGroup]="form" (submit)="onSubmit()">
+            <mat-form-field appearance="fill" class="full">
+              <mat-label>
+                {{ 'anms.donation.payment-option' | translate }}
+              </mat-label>
+              <mat-select #currencySelect formControlName="wallet">
+                <mat-option *ngFor="let w of wallets" [value]="w">
+                  {{ w.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="wallet" [cdkCopyToClipboard]="wallet.address" (cdkCopyToClipboardCopied)="onCopy()">
+              {{ wallet.address }}
+              <mat-icon class="copy">
+                content_copy
+              </mat-icon>
+            </div>
+
+            <mat-form-field appearance="fill" class="full">
+              <mat-label>
+                {{ 'anms.donation.hash' | translate }}
+              </mat-label>
+              <textarea matInput rows="5" formControlName="hash"></textarea>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit">
+              <mat-icon *ngIf="loading">
+                <mat-spinner color="accent" diameter="20"> </mat-spinner>
+              </mat-icon>
+              {{ 'anms.donation.upgrade' | translate }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

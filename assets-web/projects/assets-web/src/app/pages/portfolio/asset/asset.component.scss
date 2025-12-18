@@ -1,0 +1,104 @@
+@import '../../../../styles-variables';
+
+
+h3 {
+  margin: 0;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+header {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.category-list {
+  display: block;
+  padding: 0;
+  margin: 0;
+
+  .category-item {
+    list-style: none;
+    display: block;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .category-footer {
+    button {
+      margin-right: 20px;
+    }
+    mat-slide-toggle {
+      margin-top: 20px;
+    }
+
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+      display: flex;
+      mat-slide-toggle {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.category-row {
+  display: flex;
+  margin: 0 -1%;
+
+  .category-row--nested {
+    flex: 1;
+    max-width: calc(100% - 35px);
+  }
+}
+
+.category-full {
+  width: 100%;
+  padding: 0 1%;
+}
+
+.category-one-third {
+  width: calc(100% / 3);
+  padding: 0 1%;
+}
+
+.category-two-third {
+  width: calc(2 * 100% / 3);
+  padding: 0 1%;
+}
+
+.category-half {
+  width: calc(100% / 2);
+  padding: 0 1%;
+}
+
+.add-btn {
+  position: relative;
+  top: 8px;
+}
+
+button .mat-icon {
+  position: relative;
+}
+
+.options-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-category {
+  margin-bottom: 40px;
+}
+
+.error-text {
+  margin-bottom: 20px;
+}

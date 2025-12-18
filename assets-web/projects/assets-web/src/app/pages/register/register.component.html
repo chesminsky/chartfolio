@@ -1,0 +1,70 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <div class="login">
+        <h3>
+          {{ 'anms.login.register-title' | translate }}
+        </h3>
+        <ng-container *ngIf="registeredEmail$ | async as email; else formBlock">
+          <div class="registered">
+            <mat-icon class="check-icon">check</mat-icon>
+            <div class="registered-text">
+              <h4>
+                {{ 'anms.login.registered-header' | translate }}
+              </h4>
+              <p>
+                {{ 'anms.login.registered-text-pre' | translate }}
+                <span class="bold">
+                  {{ email }}
+                </span>
+              </p>
+              <p>
+                {{ 'anms.login.registered-text-post' | translate }}
+              </p>
+            </div>
+          </div>
+          <div class="other">
+            {{ 'anms.login.have-not-received-code' | translate }} <br>
+            <span class="link" (click)="resendEmailVerification()">
+              {{ 'anms.login.resend-email-verification' | translate }}
+            </span>
+          </div>
+        </ng-container>
+        <ng-template #formBlock>
+          <form [formGroup]="form" (submit)="onSubmit()" autocomplete="off">
+            <mat-form-field appearance="fill" class="full">
+              <mat-label>{{ 'anms.login.email' | translate }}</mat-label>
+              <input type="text" matInput formControlName="email" />
+              <mat-error>
+                {{ 'anms.login.invalid-email' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="full password">
+              <mat-label>{{ 'anms.login.password' | translate }}</mat-label>
+              <input [type]="showPass ? 'text' : 'password'" matInput formControlName="password" />
+              <mat-icon matSuffix (click)="showPass = !showPass">remove_red_eye</mat-icon>
+              <mat-error>
+                {{ 'anms.login.weak-password' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary">
+              <mat-icon *ngIf="loading$ | async">
+                <mat-spinner color="accent" diameter="20"> </mat-spinner>
+              </mat-icon>
+              {{ 'anms.login.register-button' | translate }}
+            </button>
+          </form>
+        </ng-template>
+
+        <ng-container *ngIf="!(registeredEmail$ | async)">
+          <div class="other">
+            {{ 'anms.login.already-have-account' | translate }}
+            <a class="link" [routerLink]="['/login']">{{ 'anms.login.login-link' | translate }}</a>
+          </div>
+  
+          <anms-social-auth></anms-social-auth>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

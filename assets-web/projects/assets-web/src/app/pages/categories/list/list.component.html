@@ -1,0 +1,73 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <anms-messages></anms-messages>
+      <header>
+        <h3>{{ 'anms.menu.categories' | translate }}</h3>
+        <div>
+          <button type="button" mat-raised-button (click)="toNew()">
+            {{ 'anms.categories.add' | translate }}
+          </button>
+        </div>
+      </header>
+      <ng-container *ngIf="categories$ | async as categories">
+        <mat-table *ngIf="categories" [dataSource]="categories" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>{{ 'anms.categories.group-name' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let category">
+              <span *ngIf="CATEGORIES_TRANSLATIONS[category.code]; else categoryName">
+                {{ CATEGORIES_TRANSLATIONS[category.code] | translate }}
+              </span>
+              <ng-template #categoryName>
+                {{ category.name }}
+              </ng-template>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="options">
+            <mat-header-cell *matHeaderCellDef>{{ 'anms.categories.options' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let category">
+              <div class="nowrap">
+                {{ getOptions(category) }}
+              </div>
+              <div
+                class="mobile-actions error-notification-overlay"
+                [ngClass]="{ 'is-active': mobileActionsRow === category }"
+              >
+                <button mat-icon-button type="button" (click)="deleteCategory(category)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let category">
+              <button
+                class="desktop"
+                mat-icon-button
+                type="button"
+                *ngIf="category.code !== category._id"
+                (click)="deleteCategory(category)"
+              >
+                <mat-icon class="delete">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            (click)="toEdit(row)"
+            (swipeleft)="onSwipeLeft($event, row)"
+            (swiperight)="onSwipeRight($event, row)"
+          ></mat-row>
+          <div *matNoDataRow>
+            <div class="no-data">
+              {{ 'anms.categories.no-data' | translate }}
+            </div>
+          </div>
+        </mat-table>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,146 @@
+body,
+html {
+  height: 100%;
+  min-height: 100vh;
+}
+.app-loading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.app-loading .spinner {
+  height: 200px;
+  width: 200px;
+  animation: rotate 2s linear infinite;
+  transform-origin: center center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.app-loading .spinner .path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite;
+  stroke-linecap: round;
+  stroke: #ddd;
+}
+
+.full {
+  width: 100%;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.desktop {
+  display: block !important;
+  @media (max-width: map-get($grid-breakpoints, lg)) {
+    display: none !important;
+  }
+}
+
+.mobile {
+  display: none !important;
+  @media (max-width: map-get($grid-breakpoints, lg)) {
+    display: block !important;
+  }
+}
+
+.background {
+  padding: 20px 0 100px;
+  position: relative;
+
+  .container {
+    position: relative;
+  }
+}
+
+.more-link {
+  line-height: 42px;
+  padding: 0 16px;
+  display: block;
+  white-space: nowrap;
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.text-muted {
+  color: #666;
+}
+
+.skeleton-item {
+  background: #eee;
+}
+
+.skeleton {
+  overflow: hidden;
+  position: relative;
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(90deg, rgba(#fff, 0) 0, rgba(#fff, 0.2) 20%, rgba(#fff, 0.5) 60%, rgba(#fff, 0));
+    animation: shimmer 2s infinite;
+    content: '';
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+.currency-dropdown {
+  min-width: 140px !important;
+  right: 80px;
+  position: relative !important;
+  top: -30px;
+}
+
+mat-row {
+  cursor: pointer;
+}
+
+button mat-icon {
+  position: relative;
+  top: -2px;
+}
+
+.mdc-icon-button:hover .mdc-icon-button__ripple {
+  display: none !important;
+}

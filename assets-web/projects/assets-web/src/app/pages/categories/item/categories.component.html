@@ -1,0 +1,81 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <header>
+        <div class="flex">
+          <button mat-icon-button type="button" (click)="back()">
+            <mat-icon>
+              arrow_back
+            </mat-icon>
+          </button>
+          <h3 *ngIf="initialModel">
+            <span *ngIf="editMode">
+              {{ isDefaultCategory ? (CATEGORIES_TRANSLATIONS[initialModel.code] | translate) : initialModel.name }}
+            </span>
+            <span *ngIf="!editMode">
+              {{ 'anms.categories.create-new' | translate }}
+            </span>
+          </h3>
+        </div>
+
+        <div *ngIf="editMode && initialModel.code !== initialModel._id">
+          <button type="button" mat-raised-button (click)="delete()">
+            <mat-icon>delete</mat-icon>
+            {{ 'anms.categories.delete' | translate }}
+          </button>
+        </div>
+      </header>
+      <form #formRef="ngForm" *ngIf="form" [formGroup]="form" autocomplete="off" (submit)="onSubmit()">
+        <mat-form-field appearance="fill" class="full">
+          <mat-label>{{ 'anms.categories.name' | translate }}</mat-label>
+          <input matInput type="text" formControlName="name" />
+        </mat-form-field>
+
+        <ul>
+          <li *ngFor="let c of options.controls; index as i" formArrayName="options">
+            <form [formGroupName]="i" autocomplete="off">
+              <mat-form-field appearance="fill" class="full">
+                <mat-label>{{ 'anms.categories.option' | translate }}</mat-label>
+                <input matInput type="text" formControlName="name" />
+              </mat-form-field>
+            </form>
+
+            <button
+              mat-icon-button
+              type="button"
+              (click)="deleteOption(i)"
+              *ngIf="initialModel.code !== initialModel._id"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </li>
+        </ul>
+
+        <div class="error-text mb-20" *ngIf="formRef.submitted && form.get('options').hasError('optionsNotUnique')">
+          {{ 'anms.portfolio.asset.error-options-not-unique' | translate }}
+        </div>
+
+        <div class="mb-40" *ngIf="!isDefaultCategory">
+          <button type="button" mat-raised-button (click)="addOption()">
+            <mat-icon>add</mat-icon>
+            {{ 'anms.categories.add-option' | translate }}
+          </button>
+        </div>
+
+        <button *ngIf="!editMode" type="submit" mat-raised-button color="primary">
+          <mat-icon *ngIf="loading$ | async">
+            <mat-spinner color="accent" diameter="20"> </mat-spinner>
+          </mat-icon>
+          {{ 'anms.categories.create' | translate }}
+        </button>
+
+        <button *ngIf="editMode" [disabled]="isDefaultCategory" type="submit" mat-raised-button color="primary">
+          <mat-icon *ngIf="loading$ | async">
+            <mat-spinner color="accent" diameter="20"> </mat-spinner>
+          </mat-icon>
+          {{ 'anms.categories.update' | translate }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

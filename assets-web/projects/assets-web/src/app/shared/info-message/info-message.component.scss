@@ -1,0 +1,36 @@
+:host {
+  position: relative;
+  margin-bottom: 16px;
+
+  display: block;
+
+  .info-message-body {
+    position: relative;
+    z-index: 2;
+    padding: 20px 40px 20px 20px;
+    white-space: pre-line;
+  }
+
+  .message-overlay {
+    z-index: 1;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 4px;
+  }
+
+  .close {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    z-index: 2;
+  }
+
+  ::ng-deep a {
+    text-decoration: underline;
+  }
+}

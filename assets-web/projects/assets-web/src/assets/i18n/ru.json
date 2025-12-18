@@ -1,0 +1,283 @@
+{
+	", ": ", ",
+	"anms": {
+		"categories": {
+			"add": "Добавить новую группу",
+			"add-option": "Добавить категорию",
+			"codes": {
+				"ASSET_TYPE": "Тип актива",
+				"INCOME_GENERATION": "Генерация дохода",
+				"LIQUIDITY": "Ликвидность",
+				"MARKETS": "Рынки",
+				"PURPOSE_OR_GOAL": "Цель или задача",
+				"RISK_PROFILE": "Профиль риска",
+				"SECTOR_INDUSTRY": "Отрасль или индустрия"
+			},
+			"create": "Создать",
+			"create-new": "Создать новую группу",
+			"delete": "Удалить группу категорий",
+			"group-name": "Группа",
+			"name": "Название группы",
+			"no-data": "У вас нет групп категорий",
+			"option": "Категория",
+			"option-codes": {
+				"AGGRESSIVE": "Агрессивный",
+				"ANNUITIES": "Аннуитеты",
+				"BONDS": "Облигации",
+				"CASH": "Наличные",
+				"COMMODITIES": "Товары",
+				"COMMUNICATION_SERVICES": "Коммуникационные услуги",
+				"CONSERVATIVE": "Консервативный",
+				"CONSUMER_DISCRETIONARY": "Товары второй необходимости",
+				"CONSUMER_STAPLES": "Товары первой необходимости",
+				"CRYPTO": "Крипто",
+				"DEVELOPED": "Развитые",
+				"DIVIDEND_PAYING_STOCKS": "Акции с дивидендами",
+				"EMERGENCY_FUND": "Экстренный резерв",
+				"EMERGING": "Развивающиеся",
+				"ENERGY": "Нефть и газ",
+				"FINANCIAL_SERVICES": "Финансы",
+				"HEALTHCARE": "Здравоохранение",
+				"ILLIQUID_ASSETS": "Неликвидные активы",
+				"INDUSTRIALS": "Промышленность",
+				"INFORMATION_TECHNOLOGY": "Информационные технологии",
+				"INTEREST_PAYING_BONDS": "Облигации с процентами",
+				"LIQUID_ASSETS": "Ликвидные активы",
+				"LONG_TERM_GROWTH": "Долгосрочный рост",
+				"MATERIALS": "Сырьевой сектор",
+				"MODERATE": "Умеренный",
+				"REAL_ESTATE": "Недвижимость",
+				"REIT": "REIT",
+				"RENTAL_PROPERTIES": "Арендная недвижимость",
+				"RETIREMENT_SAVINGS": "Сбережения на пенсию",
+				"RUSSIA": "Россия",
+				"SEMI_LIQUID_ASSETS": "Полуликвидные активы",
+				"SHORT_TERM_GOALS": "Краткосрочные цели",
+				"STOCKS": "Акции",
+				"USA": "США",
+				"UTILITIES": "Коммунальные услуги"
+			},
+			"options": "Категории",
+			"update": "Обновить"
+		},
+		"description": {
+			"dividends": "Дивиденды",
+			"overview": "Следите за состоянием вашего инвестиционного портфеля в этом приложении. Добавляйте любые валюты, акции, криптовалюту. Назначайте пользовательские категории для анализа ваших инвестиций с помощью круговых диаграмм."
+		},
+		"dividends": {
+			"no-data": "Нет дивидендов за этот год",
+			"tax-included": "Учитывать налог",
+			"tax-value": "Налог (%)",
+			"title": "Дивиденды",
+			"total": "Всего дивидендов",
+			"year": "Год"
+		},
+		"donation": {
+			"copied": "Адрес скопирован",
+			"hash": "Хеш транзакции",
+			"payment-option": "Опция платежа",
+			"success-text": "Мы свяжемся с вами в ближайшее время!",
+			"success-title": "Ваш запрос отправлен",
+			"upgrade": "Улучшить аккаунт"
+		},
+		"login": {
+			"already-have-account": "Уже есть аккаунт?",
+			"dont-have-account": "У вас нет аккаунта?",
+			"email": "Email адрес",
+			"facebook-login": "Продолжить с Facebook",
+			"forgot-password": "Забыли пароль?",
+			"forgot-password-button": "Сбросить пароль",
+			"forgot-password-header": "Проверьте ваш email",
+			"forgot-password-text-post": "Перейдите по ссылке из этого письма для того чтобы сбросить пароль",
+			"forgot-password-text-pre": "Мы отправили email на адрес",
+			"forgot-password-title": "Забыли пароль?",
+			"google-login": "Продолжить с Google",
+			"have-not-received-code": "Не получили письмо?",
+			"invalid-email": "Неверный формат email",
+			"login-button": "Войти",
+			"login-link": "Войти",
+			"login-title": "Добро пожаловать",
+			"or": "ИЛИ",
+			"password": "Пароль",
+			"password-not-match": "Папрль не совпадает",
+			"register-button": "Продолжить",
+			"register-link": "Создать аккаунт",
+			"register-title": "Создайте ваш аккаунт",
+			"registered-header": "Пожалуйста, подтвердите ваш адрес электронной почты",
+			"registered-text-post": "Перейдите по ссылке из этого письма, чтобы завершить регистрацию. Если вы не видите письмо, вы можете проверить папку со спамом.",
+			"registered-text-pre": "Мы отправили электронное письмо на адрес",
+			"resend-email-verification": "Отправить повторно",
+			"weak-password": "Пароль должен содержать минимум 8 символов, 1 заглавную букву и 1 цифру"
+		},
+		"menu": {
+			"add-portfolio": "Добавить портфель",
+			"categories": "Категории",
+			"dividends": "Дивиденды",
+			"login": "Войти",
+			"logout": "Выход",
+			"more": "Настроить...",
+			"overview": "Обзор",
+			"portfolios": "Портфели",
+			"register": "Регистрация",
+			"settings": "Настройки"
+		},
+		"notification": {
+			"asset-created": "Добавлен новый актив",
+			"asset-deleted": "Актив удален",
+			"asset-edited": "Отредактирован актив",
+			"auth-error": "Ошибка аутентификаци",
+			"category-created": "Добавлена новая группа",
+			"category-deleted": "Группа категорий удалена",
+			"category-edited": "Отредактирована группа",
+			"email-verified": "Ваш аккаунт активирован. Вы можете войти используя ваш email и пароль",
+			"email-verify-link-invalid": "Эта ссылка верификации больше не действительна",
+			"file-error": "Не удалось загрузить файл. Попробуйте снова.",
+			"file-format-error": "Файл должен быть в формате .csv, .xlsx",
+			"password-changed": "Пароль изменен",
+			"verification-email-sent": "Email отправлен"
+		},
+		"overview": {
+			"add-asset": "Добавить активы",
+			"add-category": "Добавить категории...",
+			"add-portfolio": "Создать портфель...",
+			"all": "Все портфели",
+			"categories": "Категории",
+			"go-to": "Перейти к",
+			"go-to-portfolio": "Перейти к портфелям",
+			"no-data": "Ваш портфель пуст",
+			"not-authenticated": "Вы не авторизованы. \n Все изменения, которые вы вносите сохраняются локально на вашем устройстве. При обновлении приложения или очистке кеша они могут быть потеряны. Для сохранности данных, войдите в свой аккаунт.",
+			"portfolios": "Портфель",
+			"run-out-of-limits": "Вы превысили количество активов или категорий.\nДля того чтобы продолжить ",
+			"title": "Обзор портфелей",
+			"upgrade": "перейдите по ссылке"
+		},
+		"portfolio-name": "Название",
+		"portfolio": {
+			"add-asset": "Добавить актив",
+			"asset": {
+				"add-category": "Добавить группу категорий",
+				"category": "Группа категорий",
+				"code": "Код",
+				"create": "Создать",
+				"create-new": "Добавить новый актив",
+				"currency": "Выберите валюту",
+				"delete": "Удалить актив",
+				"delete-category": "Удалить группу",
+				"enter-code": "Введите код",
+				"enter-name": "Введите название",
+				"enter-price": "Введите цену",
+				"enter-value": "Введите значение",
+				"error-categories-not-unique": "Дублирующиеся группы",
+				"error-options-not-unique": "Дублирюущиеся категории",
+				"error-percentage-sum": "Сумма долей должа быть равна 100%",
+				"name": "Название",
+				"option": "Категория",
+				"percentage": "Доля, %",
+				"price": "Цена за единицу",
+				"search-crypto": "Поиск криптовалют",
+				"search-currency": "Поиск валют",
+				"search-for-categories": "Поиск категорий...",
+				"search-stocks": "Поиск фондов",
+				"type": "Выберите тип",
+				"types": {
+					"crypto": "Криптовалюты (Coingecko)",
+					"currency": "Валюты",
+					"custom": "Другое",
+					"moex": "Акции, фонды и др. (Мосбиржа)",
+					"stocks": "Акции, фонды и др. (Yahoo finance)"
+				},
+				"update": "Сохранить",
+				"value": "Значение"
+			},
+			"categories": "Категории",
+			"create": "Создать новый портфель",
+			"create-btn": "Создать",
+			"import": "Импортировать из Yahoo Finance",
+			"import-tooltip": "Если вы используете Yahoo Finance, вы можете экспортировать свои активы в файл csv файл и загрузить здесь. Доступно в pro аккаунте.",
+			"name": "Название",
+			"no-assets-data": "У вас нет активов",
+			"no-data": "У вас нет портфелей",
+			"price": "Стоимость",
+			"shared": {
+				"autocomplete": {
+					"no_results": "Ничего не найдено"
+				}
+			},
+			"symbol": "Код",
+			"total": "Всего",
+			"value": "Количество"
+		},
+		"reset-password": {
+			"confirm-password": "Подверждение пароля",
+			"email": "Email",
+			"old-password": "Текущий пароль",
+			"password": "Новый пароль",
+			"submit-button": "Отправить",
+			"title": "Сбросить пароль"
+		},
+		"settings": {
+			"general": {
+				"currencies-label": "Избранные валюты",
+				"currencies-search": "Поиск...",
+				"language-placeholder": "Выбор языка",
+				"title": "Общие настройки"
+			},
+			"themes": {
+				"blue": "Синяя",
+				"dark": "Темная",
+				"light": "Светлая",
+				"nature": "Природа",
+				"night-mode": "Ночной режим",
+				"placeholder": "Выбор темы",
+				"title": "Темы"
+			},
+			"title": "Настройки"
+		}
+	},
+	"server": {
+		"errors": {
+			"api": {
+				"crypto": "Ошибка получения данных о криптовалютах",
+				"currency": "Ошибка получения данных о валютах",
+				"moex": "Ошибка получения данных MOEX",
+				"yahoo": "Ошибка получения данных Yahoo"
+			},
+			"assets": {
+				"limit": "Максимальное количество активов достигнуто"
+			},
+			"auth": {
+				"already-registered": "Пользователь с таким email уже зарегистрирован",
+				"change-password": "Ошибка изменения пароля",
+				"error": "Ошибка авторизации",
+				"invalid-credentials": "Неверные имя пользователя или пароль",
+				"login-sent-recently": "Код верификации уже был отправлен недавно. Таймаут 3 минуты",
+				"no-password-provided": "Пустой пароль",
+				"reset_password_sent_recently": "Код для сброса пароля отправлен недавно. Таймаут 3 минуты",
+				"user-not-found": "Пользователь не найден",
+				"user-not-registered": "Пользователь не зарегистрирован",
+				"user-not-verified": "Пользователь не верифицирован",
+				"wrong-current-password": "Неверный пароль",
+				"wrong-email-token": "Неверный код для сброса пароля"
+			},
+			"categories": {
+				"limit": "Максимальное количество категорий достигнуто"
+			}
+		}
+	},
+	"shared": {
+		"months": {
+			"april": "Апрель",
+			"august": "Август",
+			"december": "Декабрь",
+			"february": "Февраль",
+			"january": "Январь",
+			"july": "Июль",
+			"june": "Июнь",
+			"march": "Март",
+			"may": "Май",
+			"november": "Ноябрь",
+			"october": "Октябрь",
+			"september": "Сентябрь"
+		}
+	}
+}

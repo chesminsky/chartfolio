@@ -1,0 +1,57 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+      <anms-messages></anms-messages>
+      <header>
+        <h3>{{ 'anms.menu.portfolios' | translate }}</h3>
+        <div>
+          <button type="button" mat-raised-button (click)="toNew()">
+            {{ 'anms.menu.add-portfolio' | translate }}
+          </button>
+        </div>
+      </header>
+      <ng-container *ngIf="portfolios$ | async as portfolios">
+        <mat-table *ngIf="portfolios" mat-mat-table [dataSource]="portfolios" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>
+              {{ 'anms.portfolio-name' | translate }}
+            </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">
+              {{ element.name }}
+
+              <div
+                class="mobile-actions error-notification-overlay"
+                [ngClass]="{ 'is-active': mobileActionsRow === element }"
+              >
+                <button mat-icon-button type="button" (click)="deletePortfolio($event, element)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">
+              <button class="desktop" mat-icon-button type="button" (click)="deletePortfolio($event, element)">
+                <mat-icon class="delete">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            (click)="toEdit(row)"
+            (swipeleft)="onSwipeLeft($event, row)"
+            (swiperight)="onSwipeRight($event, row)"
+          ></mat-row>
+          <div *matNoDataRow>
+            <div class="no-data">
+              {{ 'anms.portfolio.no-data' | translate }}
+            </div>
+          </div>
+        </mat-table>
+      </ng-container>
+    </div>
+  </div>
+</div>
