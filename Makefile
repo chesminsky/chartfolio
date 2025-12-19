@@ -26,6 +26,7 @@ help:
 	@echo ""
 	@echo "Deployment targets:"
 	@echo "  push            Push Docker images to registry"
+	@echo "  deploy-env      Deploy .env file to server via SSH"
 	@echo "  login           SSH to deployment server"
 
 up:
@@ -70,6 +71,9 @@ install-web:
 push:
 	docker push harbor.ru.dmitriy.space/library/chartfolio-server:latest
 	docker push harbor.ru.dmitriy.space/library/chartfolio-web:latest
+
+deploy-env:
+	./deploy-env.sh
 
 login:
 	ssh -p '37018' 'grig@dmitriy.space'
