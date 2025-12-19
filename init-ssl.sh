@@ -39,12 +39,53 @@ echo "Step 2: Starting nginx temporarily for certificate validation..."
 # Start nginx without SSL to allow certbot to validate
 $DOCKER_COMPOSE up -d nginx
 
+# Wait for nginx to be ready
+echo "Waiting for nginx to be ready..."
+sleep 5
+for i in {1..30}; do
+    if $DOCKER_COMPOSE exec -T nginx nginx -t > /dev/null 2>&1; then
+        echo "✓ Nginx is ready"
+        break
+    fi
+    if [ $i -eq 30 ]; then
+        echo "✗ Nginx failed to start properly"
+        echo "Check nginx logs: $DOCKER_COMPOSE logs nginx"
+        exit 1
+    fi
+    sleep 1
+done
+
 echo ""
 echo "Step 3: Requesting SSL certificates from Let's Encrypt..."
 echo "This may take a minute..."
 
+# Ensure the certbot-www volume directory exists and is accessible
+echo "Verifying volume setup..."
+$DOCKER_COMPOSE exec -T nginx mkdir -p /var/www/certbot/.well-known/acme-challenge || true
+
+# Test that nginx can serve files from the webroot
+echo "Testing nginx configuration..."
+$DOCKER_COMPOSE exec -T nginx sh -c 'echo "test" > /var/www/certbot/.well-known/acme-challenge/test.txt' || true
+
+# Verify nginx is listening on port 80
+echo "Verifying nginx is listening on port 80..."
+if ! $DOCKER_COMPOSE exec -T nginx sh -c 'netstat -tuln | grep -q ":80 " || ss -tuln | grep -q ":80 "' 2>/dev/null; then
+    echo "Warning: Nginx may not be listening on port 80"
+    echo "Check nginx logs: $DOCKER_COMPOSE logs nginx"
+fi
+
+# Important: Ensure the domain points to this server and port 80 is accessible from the internet
+echo ""
+echo "⚠️  IMPORTANT: Before proceeding, ensure:"
+echo "   1. Domain $DOMAIN DNS points to this server's public IP"
+echo "   2. Port 80 is open and accessible from the internet"
+echo "   3. No firewall is blocking incoming connections on port 80"
+echo ""
+
 # Run certbot in the certbot container to obtain certificates
 # Override the entrypoint since the default one runs a renewal loop
+# Volumes are inherited from service definition, but explicitly mount to be sure
+echo "Running certbot..."
 $DOCKER_COMPOSE run --rm \
     --entrypoint "certbot" \
     -e CERTBOT_EMAIL="$EMAIL" \
