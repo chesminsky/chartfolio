@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# Script to initialize SSL certificates for chartfolio.me
+# Script to initialize SSL certificates for chartfolio.online
 # This should be run once to obtain the initial certificates
 
-DOMAIN="chartfolio.me"
-EMAIL="${CERTBOT_EMAIL:-admin@chartfolio.me}"
+DOMAIN="chartfolio.online"
+EMAIL="${CERTBOT_EMAIL:-admin@chartfolio.online}"
 
 echo "Initializing SSL certificates for $DOMAIN..."
 echo "Using email: $EMAIL"

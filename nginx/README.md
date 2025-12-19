@@ -1,6 +1,6 @@
 # Nginx Docker Setup with SSL
 
-This directory contains the nginx configuration and Docker setup for the chartfolio.me domain with automatic SSL certificate management.
+This directory contains the nginx configuration and Docker setup for the chartfolio.online domain with automatic SSL certificate management.
 
 ## Files
 
@@ -13,7 +13,7 @@ This directory contains the nginx configuration and Docker setup for the chartfo
 
 ### Initial Setup
 
-1. Ensure your domain `chartfolio.me` points to your server's IP address
+1. Ensure your domain `chartfolio.online` points to your server's IP address
 2. Make sure ports 80 and 443 are open and accessible
 3. Run the initialization script from the project root:
 
@@ -93,14 +93,14 @@ The nginx configuration routes traffic as follows:
 
 ### Certificates not being obtained
 
-- Verify domain DNS points to your server: `dig chartfolio.me`
+- Verify domain DNS points to your server: `dig chartfolio.online`
 - Check that ports 80 and 443 are accessible from the internet
 - Review certbot logs: `docker-compose logs certbot`
 - Review nginx logs: `docker-compose logs nginx`
 
 ### Nginx fails to start
 
-- Check if certificates exist: `docker-compose exec nginx ls -la /etc/letsencrypt/live/chartfolio.me/`
+- Check if certificates exist: `docker-compose exec nginx ls -la /etc/letsencrypt/live/chartfolio.online/`
 - Test nginx configuration: `docker-compose exec nginx nginx -t`
 - Review nginx logs: `docker-compose logs nginx`
 
@@ -120,7 +120,7 @@ The nginx configuration routes traffic as follows:
 
 You can set the following environment variables:
 
-- `CERTBOT_EMAIL` - Email address for Let's Encrypt notifications (default: admin@chartfolio.me)
+- `CERTBOT_EMAIL` - Email address for Let's Encrypt notifications (default: admin@chartfolio.online)
 
 ## Network Architecture
 

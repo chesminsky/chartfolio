@@ -5,8 +5,8 @@
 
 set -e
 
-DOMAIN="chartfolio.me"
-EMAIL="${1:-${CERTBOT_EMAIL:-admin@chartfolio.me}}"
+DOMAIN="chartfolio.online"
+EMAIL="${1:-${CERTBOT_EMAIL:-chartfolio@gmail.com}}"
 
 echo "=========================================="
 echo "SSL Certificate Initialization"

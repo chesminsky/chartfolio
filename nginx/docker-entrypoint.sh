@@ -2,8 +2,8 @@
 set -e
 
 # Check if SSL certificates exist
-if [ -f "/etc/letsencrypt/live/chartfolio.me/fullchain.pem" ] && \
-   [ -f "/etc/letsencrypt/live/chartfolio.me/privkey.pem" ]; then
+if [ -f "/etc/letsencrypt/live/chartfolio.online/fullchain.pem" ] && \
+   [ -f "/etc/letsencrypt/live/chartfolio.online/privkey.pem" ]; then
     echo "SSL certificates found, using HTTPS configuration"
     cp /etc/nginx/conf.d/nginx.conf /etc/nginx/conf.d/default.conf
 else
