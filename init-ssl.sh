@@ -35,28 +35,43 @@ echo "Step 1: Starting services (without nginx)..."
 $DOCKER_COMPOSE up -d server web
 
 echo ""
-echo "Step 2: Starting nginx temporarily for certificate validation..."
+echo "Step 2: Rebuilding nginx container to ensure latest configuration..."
+# Rebuild nginx to ensure it has the correct configuration files
+$DOCKER_COMPOSE build nginx
+
+echo ""
+echo "Step 3: Starting nginx temporarily for certificate validation..."
 # Start nginx without SSL to allow certbot to validate
 $DOCKER_COMPOSE up -d nginx
 
 # Wait for nginx to be ready
 echo "Waiting for nginx to be ready..."
 sleep 5
-for i in {1..30}; do
-    if $DOCKER_COMPOSE exec -T nginx nginx -t > /dev/null 2>&1; then
-        echo "✓ Nginx is ready"
+
+# Check if nginx container is running
+NGINX_RUNNING=false
+for i in {1..20}; do
+    if $DOCKER_COMPOSE ps nginx 2>/dev/null | grep -q "Up\|running"; then
+        NGINX_RUNNING=true
+        echo "✓ Nginx container is running"
         break
-    fi
-    if [ $i -eq 30 ]; then
-        echo "✗ Nginx failed to start properly"
-        echo "Check nginx logs: $DOCKER_COMPOSE logs nginx"
-        exit 1
     fi
     sleep 1
 done
 
+if [ "$NGINX_RUNNING" = false ]; then
+    echo "✗ Nginx container failed to start"
+    echo "Check nginx status: $DOCKER_COMPOSE ps nginx"
+    echo "Check nginx logs: $DOCKER_COMPOSE logs nginx"
+    exit 1
+fi
+
+# Give nginx a moment to fully initialize
+sleep 3
+echo "✓ Nginx should be ready"
+
 echo ""
-echo "Step 3: Requesting SSL certificates from Let's Encrypt..."
+echo "Step 4: Requesting SSL certificates from Let's Encrypt..."
 echo "This may take a minute..."
 
 # Ensure the certbot-www volume directory exists and is accessible
@@ -101,7 +116,7 @@ if [ $? -eq 0 ]; then
     echo ""
     echo "✓ SSL certificates successfully obtained!"
     echo ""
-    echo "Step 4: Reloading nginx to use SSL configuration..."
+    echo "Step 5: Reloading nginx to use SSL configuration..."
     # Restart nginx so the entrypoint script detects certificates and switches to SSL config
     $DOCKER_COMPOSE restart nginx
     
