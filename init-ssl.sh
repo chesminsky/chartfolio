@@ -44,7 +44,9 @@ echo "Step 3: Requesting SSL certificates from Let's Encrypt..."
 echo "This may take a minute..."
 
 # Run certbot in the certbot container to obtain certificates
+# Override the entrypoint since the default one runs a renewal loop
 $DOCKER_COMPOSE run --rm \
+    --entrypoint "certbot" \
     -e CERTBOT_EMAIL="$EMAIL" \
     certbot certonly \
     --webroot \
